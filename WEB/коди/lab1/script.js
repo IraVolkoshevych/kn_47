@@ -1,0 +1,1 @@
+alert("From file: Shandra Oleg Stepanovych, KN-47, 2432432545");

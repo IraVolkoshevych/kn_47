@@ -1,0 +1,129 @@
+<html> 
+    <head> 
+    </head> 
+    <body> 
+        <form> 
+            <label>КН-43</label><br/>
+            <a href="http://lp.edu.ua/students_schedule/institutecode_selective%20dugrupabr_selictive%20%D0%9E%D0%9F-13?institutecode_selective=%D0%86%D0%9A%D0%9D%D0%86&edugrupabr_selective=%D0%9A%D0%9D-43">Розклад Тут</a><br/>
+            <label>dd.mm.yyyy, hh:mm:ss</label><br/>
+            <input type="text" id="dateTime">
+            <input type="button" onClick="check()" value="Перевірити">
+        </form> 
+    </body> 
+    <footer>
+        <script> 
+            document.getElementById("dateTime").value = (new Date()).toLocaleString();
+
+            //Інформація з сайту http://lp.edu.ua/students_schedule
+            //Масив з днми тижня наповненими розкладом
+            var scedule = [
+                [], //Неділя
+                [ //Понеділок
+                    "Веб-технології та веб-дизайн, 104 V н.к., Лабораторна",
+                    "Економіка та бізнес, 414 V н.к., Лекція",
+                    "Основи автоматизованого проектування складних об'єктів і систем, 322 I н.к., Лекція",
+                    "Основи управління економічними та соціальними системами, 322 I н.к., Лекція",
+                    "Основи управління економічними та соціальними системами, 802а V н.к., Практична"
+                ], 
+                [ //Вівторок
+                    "Веб-технології та веб-дизайн, 218 I н.к., Лекція",
+                    "Основи цифрової обробки сигналів, 804б V н.к., Лабораторна",
+                    "Проектування інформаційних систем, 803 V н.к., Лабораторна",
+                    "Основи автоматизованого проектування складних об'єктів і систем, 804а V н.к., Лабораторна",
+                    "Математичні методи представлення знань, 803 V н.к., Лабораторна"
+                ], 
+
+                [], //Середа (немає розкладу)
+
+                [ //Четвер
+                    "Проектування інформаційних систем, 107a V н.к., Лабораторна",
+                    "Веб-технології та веб-дизайн, 107a V н.к., Лабораторна",
+                    "Проектування інформаційних систем, 218 I н.к., Лекція",
+                    "Основи автоматизованого проектування складних об'єктів і систем, 218 I н.к., Лекція",
+                    "Основи цифрової обробки сигналів, 107a V н.к., Лабораторна",
+                ], 
+                [ //Пятниця
+                    null,
+                    null,
+                    "Основи цифрової обробки сигналів, 414 V н.к., Лекція",
+                    "Математичні методи представлення знань, 217 I н.к., Лекція",
+                    "Математичні методи представлення знань, 804а V н.к., Лабораторна"
+                ],
+                [] //Субота
+            ];
+
+            function getWorkingProccessNumber(hour, minutes){
+                var workingTimes = [
+                    { fromHour: 8 , fromMinutes: 30, toHour: 10, toMinutes: 05 },
+                    { fromHour: 10, fromMinutes: 20, toHour: 11, toMinutes: 55 },
+                    { fromHour: 12, fromMinutes: 10, toHour: 13, toMinutes: 45 },
+                    { fromHour: 14, fromMinutes: 15, toHour: 15, toMinutes: 50 },
+                    { fromHour: 16, fromMinutes: 00, toHour: 17, toMinutes: 35 }
+                ];
+
+                for(var i = 0; i < workingTimes.length; i++){
+                    //Якщо година рівна годині з можливих годин початку пар то 
+                    //порівняти хвилини (якщо поточна більша то зараз пара)
+                    if(hour == workingTimes[i].fromHour){
+                        if(minutes >= workingTimes[i].fromMinutes){
+                            return i;
+                        }
+                    }
+
+                    //Якщо година рівна годині з можлвиих годин закінчення пар то 
+                    //порівняти хвилини (якщо поточна менша то зараз пара)
+                    if(hour == workingTimes[i].toHour){
+                        if(minutes <= workingTimes[i].toMinutes){
+                            return i;
+                        }
+                    }
+                }
+
+                return -1;
+            }
+
+            function getWorkingProccesNameByDate(dateTime){
+                var day = dateTime.getDay();
+                
+                //0 - неділя
+                if(day == 0 || day == 6){
+                    return "Вихідний.";
+                }
+
+                var hour = dateTime.getHours();
+                var minute = dateTime.getMinutes();
+
+                var workNumber = getWorkingProccessNumber(hour, minute);
+
+                if(workNumber == -1){
+                    return "Немає пари.";
+                }
+
+                var workName = scedule[day][workNumber];
+                if(!workName){
+                    return "Немає пари.";
+                }
+                else{
+                    return workName;
+                }
+            }
+
+            function check() {
+                alert(getWorkingProccesNameByDate(parseDate(document.getElementById("dateTime").value)));
+            }
+
+            //08.09.2018, 13:51:46
+            //parse a date in dd.mm.yyyy, hh:mm:ss format
+            function parseDate(input) {
+                var parts = input.split(", ");
+                var datePart = parts[0].split(".");
+                var timePart = parts[1].split(":");
+                
+                // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+                return new Date(datePart[2], datePart[1]-1, datePart[0], timePart[0], timePart[1], timePart[2]); // months are 0-based
+            }
+
+            alert(getWorkingProccesNameByDate(new Date()));
+        </script> 
+    </footer>
+</html> 

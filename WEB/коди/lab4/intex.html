@@ -1,0 +1,29 @@
+<html> 
+    <head> 
+        <script language="JavaScript"> 
+            function calculate() 
+            { 
+                var result = 0;
+                var x = document.getElementById("inputX").value;
+                var y = document.getElementById("inputY").value;
+                
+                if(x != 0){
+                    result = x / y;
+                } else if((x != 0) || (y > (3/2))) {
+                    result = (2 * x) / y;
+                } else {
+                    result = -Math.pow(x, 3) + 2 * Math.pow(y, 2);
+                }
+
+                alert("Result = " + result);
+            } 
+        </script> 
+    </head> 
+    <body> 
+        <form> 
+            <input type="number" value="0" id="inputX"/>
+            <input type="number" value="0" id="inputY"/>  
+            <input type="button" onclick="calculate()" value="Calculate">
+        </form>
+    </body> 
+</html>

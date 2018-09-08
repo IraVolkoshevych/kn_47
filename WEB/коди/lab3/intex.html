@@ -1,0 +1,23 @@
+<html> 
+    <head> 
+        <script language="JavaScript"> 
+            function onInputChanged(input) 
+            { 
+                var info = document.getElementById("info");
+                info.innerHTML = info.innerHTML + "New value = " + input.value + "<br/>"; 
+            } 
+            function onInputFocused() 
+            { 
+                var info = document.getElementById("info");
+                info.innerHTML = info.innerHTML + "New focus<br/>"; 
+            } 
+        </script> 
+    </head> 
+    <body> 
+        <form> 
+            <input type="number" value="12" onchange="onInputChanged(this)" onfocus="onInputFocused()"> 
+        </form>
+        <div id="info">
+        </div> 
+    </body> 
+</html>

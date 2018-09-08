@@ -1,0 +1,63 @@
+<html> 
+    <head> 
+        <script> 
+        var rows, columns; 
+        function build() 
+        { 
+            rows = parseInt(main_form.t_rows.value); 
+            columns = parseInt(main_form.t_columns.value); 
+            var res_rows = "<table>\n"; 
+            for(var i=1;i<=rows;i++) 
+            { 
+                res_rows+="<tr>\n"; 
+                for(var j=1;j<=columns;j++) 
+                { 
+                    res_rows += "<td>"; 
+                    var id = "_" + i + "_" + j;
+                    var currentValue = 3 * j + 2 * i;
+                    res_rows += "<input type=\"text\" id=\"" + id + "\" value=\"" + currentValue + "\">"; 
+                    res_rows += "<\/td>\n"; 
+                } 
+                    res_rows+="<\/tr>\n"; 
+            }
+            res_rows += "<\/table>";
+            main_div.innerHTML = res_rows; 
+        } 
+        function calculate() 
+        { 
+            var res_rows = ""; 
+            var rows_report = ""; 
+            var result = 1;
+
+            for(var i=1;i<=rows;i++)
+            { 
+                var currentValue = document.getElementById("_" + i + "_" + columns).value;
+                result *= currentValue;
+            } 
+            
+            alert("Добуток елементів останнього стовпця = " + result);
+        } 
+      </script> 
+    </head> 
+    <body> 
+        <form id = "main_form"> 
+            <table> 
+                <tr> 
+                    <td>Кількість рядків</td> 
+                    <td><input type="text" id = "t_rows" value="5"></td>
+                </tr>
+                <tr>
+                    <td> Кількість стовбців</td> 
+                    <td><input type="text" id = "t_columns" value="5"></td>
+                </tr> 
+                <tr> 
+                    <td><input type = "button" onClick = "build()" value = "Побудувати матрицю"><br> <td> 
+                </tr> 
+                <tr>                          
+                    <td> <input type = "button" onClick = "calculate()" value = "Розрахувати"> <td> 
+                </tr> 
+            </table> 
+            <div id = "main_div"></div> 
+        </form> 
+    </body> 
+</html> 
