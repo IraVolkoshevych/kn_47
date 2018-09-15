@@ -1,19 +1,19 @@
 <html> 
     <head> 
         <script> 
-        function schedule() 
+        function timer() 
         { 
            var seconds = document.getElementById("seconds").value;
            setTimeout(function() {
-               alert("Інтервал завершено");
+               alert("Інтервал завершився");
            }, 1000 * seconds);
         } 
       </script> 
     </head> 
     <body> 
-        <form id = "main_form"> 
+        <form id = "main"> 
             <td><input type="text" id = "seconds" value="5"></td>
-            <td><input type = "button" onClick = "schedule()" value = "Старт"><br> <td> 
+            <td><input type = "button" onClick = "timer()" value = "Старт"><br> <td> 
         </form> 
     </body> 
 </html> 
