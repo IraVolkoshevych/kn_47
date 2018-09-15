@@ -1,1 +1,1 @@
-alert("From file: Shandra Oleg Stepanovych, KN-47, 2432432545");
+alert("Ivanov Vadym Bogdanovych, KN-47, VK 10966682\nUsing related files.");
