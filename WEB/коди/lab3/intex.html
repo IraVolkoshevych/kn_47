@@ -1,23 +1,25 @@
 <html> 
     <head> 
         <script language="JavaScript"> 
-            function onInputChanged(input) 
+            function onButtonClick() 
             { 
-                var info = document.getElementById("info");
-                info.innerHTML = info.innerHTML + "New value = " + input.value + "<br/>"; 
+                var number  = document.getElementById("numberValue").value;
+                alert("SQRT(" + number + ") = " + Math.sqrt(number));
             } 
             function onInputFocused() 
             { 
-                var info = document.getElementById("info");
-                info.innerHTML = info.innerHTML + "New focus<br/>"; 
+                var text = document.getElementById("text");
+                var number  = document.getElementById("numberValue").value;
+                text.innerHTML = text.innerHTML + "Value  = " + number + "<br/>"; 
             } 
         </script> 
     </head> 
     <body> 
         <form> 
-            <input type="number" value="12" onchange="onInputChanged(this)" onfocus="onInputFocused()"> 
+            <button id="calculateButton" onClick="onButtonClick()">Calculate SQRT</button>
+            <input id="numberValue" type="number" onfocus="onInputFocused()"/> 
         </form>
-        <div id="info">
-        </div> 
+        <div id="text">
+        </div>
     </body> 
 </html>
