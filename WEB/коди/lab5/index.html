@@ -4,60 +4,58 @@
         var rows, columns; 
         function build() 
         { 
-            rows = parseInt(main_form.t_rows.value); 
-            columns = parseInt(main_form.t_columns.value); 
-            var res_rows = "<table>\n"; 
+            rows = parseInt(form.rowsCount.value); 
+            columns = parseInt(form.columnsCount.value); 
+            var table = "<table>\n"; 
             for(var i=1;i<=rows;i++) 
             { 
-                res_rows+="<tr>\n"; 
+                table+="<tr>\n"; 
                 for(var j=1;j<=columns;j++) 
                 { 
-                    res_rows += "<td>"; 
+                    table += "<td>"; 
                     var id = "_" + i + "_" + j;
-                    var currentValue = 3 * j + 2 * i;
-                    res_rows += "<input type=\"text\" id=\"" + id + "\" value=\"" + currentValue + "\">"; 
-                    res_rows += "<\/td>\n"; 
+                    var currentValue = 2 * i + 13 * j;
+                    table += "<input type=\"text\" id=\"" + id + "\" value=\"" + currentValue + "\">"; 
+                    table += "<\/td>\n"; 
                 } 
-                    res_rows+="<\/tr>\n"; 
+                table+="<\/tr>\n"; 
             }
-            res_rows += "<\/table>";
-            main_div.innerHTML = res_rows; 
+            table += "<\/table>";
+            main.innerHTML = table; 
         } 
         function calculate() 
         { 
-            var res_rows = ""; 
-            var rows_report = ""; 
-            var result = 1;
+            var result = 0;
+            
+            var countOfElementsForSum = rows < columns ? rows : columns;
 
-            for(var i=1;i<=rows;i++)
+            for(var i = 1;i <= countOfElementsForSum; i++)
             { 
-                var currentValue = document.getElementById("_" + i + "_" + columns).value;
-                result *= currentValue;
+                var currentValue = document.getElementById("_" + i + "_" + i).value;
+                result += parseInt(currentValue);
             } 
             
-            alert("Добуток елементів останнього стовпця = " + result);
+            alert("Сума елементів головної діагоналі = " + result);
         } 
       </script> 
     </head> 
     <body> 
-        <form id = "main_form"> 
+        <form id = "form"> 
             <table> 
                 <tr> 
                     <td>Кількість рядків</td> 
-                    <td><input type="text" id = "t_rows" value="5"></td>
+                    <td><input type="text" id = "rowsCount" value="3"></td>
                 </tr>
                 <tr>
-                    <td> Кількість стовбців</td> 
-                    <td><input type="text" id = "t_columns" value="5"></td>
+                    <td> Кількість стовпців</td> 
+                    <td><input type="text" id = "columnsCount" value="3"></td>
                 </tr> 
                 <tr> 
-                    <td><input type = "button" onClick = "build()" value = "Побудувати матрицю"><br> <td> 
-                </tr> 
-                <tr>                          
-                    <td> <input type = "button" onClick = "calculate()" value = "Розрахувати"> <td> 
+                    <td><input type = "button" onClick = "build()" value = "Побудувати матрицю"><br>                       
+                    <td> <input type = "button" onClick = "calculate()" value = "Здійснити обчислення"> <td> 
                 </tr> 
             </table> 
-            <div id = "main_div"></div> 
+            <div id = "main"></div> 
         </form> 
     </body> 
 </html> 
