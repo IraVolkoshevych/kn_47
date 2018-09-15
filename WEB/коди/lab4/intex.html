@@ -4,15 +4,15 @@
             function calculate() 
             { 
                 var result = 0;
-                var x = document.getElementById("inputX").value;
-                var y = document.getElementById("inputY").value;
+                var x = document.getElementById("valueX").value;
+                var y = document.getElementById("valueY").value;
                 
-                if(x != 0){
-                    result = x / y;
-                } else if((x != 0) || (y > (3/2))) {
-                    result = (2 * x) / y;
+                if(x > 0 && y > 0){
+                    result = x/y + x * y * y;
+                } else if(((y - x) / 2) > 0) {
+                    result = y / x;
                 } else {
-                    result = -Math.pow(x, 3) + 2 * Math.pow(y, 2);
+                    result = x * x;
                 }
 
                 alert("Result = " + result);
@@ -21,8 +21,8 @@
     </head> 
     <body> 
         <form> 
-            <input type="number" value="0" id="inputX"/>
-            <input type="number" value="0" id="inputY"/>  
+            <input type="number" value="0" id="valueX"/><br/><br/>
+            <input type="number" value="0" id="valueY"/><br/><br/>  
             <input type="button" onclick="calculate()" value="Calculate">
         </form>
     </body> 
