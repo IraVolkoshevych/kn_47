@@ -16,7 +16,8 @@ namespace RecipeBookSystem.Labs
                 Console.WriteLine(item.Name);
             }
             Console.WriteLine();
-            Console.WriteLine($"email - {lab1.GetUsers().Email} name - {lab1.GetUsers().Name}");
+            Console.WriteLine($"email - {lab1.GetUser().Email} name - {lab1.GetUser().Name}");
+            lab1.GetAllUsersIds();
             Console.ReadKey();
         }
     }

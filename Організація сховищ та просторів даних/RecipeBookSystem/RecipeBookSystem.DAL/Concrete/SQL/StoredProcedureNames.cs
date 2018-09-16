@@ -9,6 +9,7 @@
         //Users SP
         public const string spAddUser = "[dbo].[spUsers_Add]";
         public const string spGetUser = "[dbo].[spUser_Get]";
+        public const string spGetAllUsersIDs = "[dbo].[spGetAllUsersIDs]";
 
         //Prodcut SP
         public const string spAddProduct = "[dbo].[spProduct_AddNew]";

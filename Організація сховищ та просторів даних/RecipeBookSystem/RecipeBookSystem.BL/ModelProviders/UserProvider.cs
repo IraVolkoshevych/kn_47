@@ -58,5 +58,16 @@ namespace RecipeBookSystem.BL.ModelProviders
                 throw new Exception("Error while adding user: " + ex.Message, ex);
             }
         }
+
+        /// <summary>
+        /// Get all users id's 
+        /// </summary>
+        /// <param name="user">user to add</param>
+        /// <returns>List of id's
+        /// list of int</returns>
+        public void GetAllUsersIDs()
+        {
+            _userRepository.GetAllUsersIDs();
+        }
     }
 }

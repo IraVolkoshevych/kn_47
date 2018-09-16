@@ -22,5 +22,13 @@ namespace RecipeBookSystem.DAL.Abstraction.Repositories
         /// <returns>True - if the user does not exist and it has been
         /// successfully added, otherwise - false</returns>
         bool AddUser(UserModel user);
+
+        /// <summary>
+        /// Get all users id's 
+        /// </summary>
+        /// <param name="user">user to add</param>
+        /// <returns>List of id's
+        /// list of int</returns>
+        void GetAllUsersIDs();
     }
 }

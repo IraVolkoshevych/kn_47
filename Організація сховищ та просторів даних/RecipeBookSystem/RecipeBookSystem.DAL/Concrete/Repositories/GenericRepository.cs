@@ -29,6 +29,12 @@ namespace RecipeBookSystem.DAL.Concrete.Repositories
             return (IEnumerable<TEntity>)result;
         }
 
+        public IEnumerable<int> ExecuteReader(Func<SqlDataReader, Int32> callback, string spName)
+        {
+            var result = SqlWrapper.ExecuteReader(spName, null, callback);
+            return (IEnumerable<int>)result;
+        }
+
         /// <summary>
         /// Method for getting all <TEntity> models 
         /// </summary>

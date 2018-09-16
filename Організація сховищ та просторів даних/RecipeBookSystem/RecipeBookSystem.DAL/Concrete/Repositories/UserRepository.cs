@@ -2,6 +2,7 @@
 using RecipeBookSystem.DAL.Concrete.Parsers;
 using RecipeBookSystem.DAL.Concrete.SQL;
 using RecipeBookSystem.Model.Models;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 
@@ -68,6 +69,22 @@ namespace RecipeBookSystem.DAL.Concrete.Repositories
                 base.ExecuteReader(StoredProcedureNames.spAddUser, null, parameters);
             }
             return true;
+        }
+
+        /// <summary>
+        /// Get all users id's 
+        /// </summary>
+        /// <param name="user">user to add</param>
+        /// <returns>List of id's
+        /// list of int</returns>
+        public void GetAllUsersIDs()
+        {
+            var parameters = new[]
+                {
+                    new SqlParameter()
+            };
+            var usersIDs = //new List<int>();
+                base.ExecuteReader(null, StoredProcedureNames.spGetAllUsersIDs);
         }
     }
 }
