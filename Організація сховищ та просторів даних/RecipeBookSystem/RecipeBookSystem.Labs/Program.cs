@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RecipeBookSystem.BL.ModelProviders;
+using RecipeBookSystem.DAL.Concrete.Repositories;
+using RecipeBookSystem.Labs.Lab1;
 
 namespace RecipeBookSystem.Labs
 {
@@ -10,6 +9,15 @@ namespace RecipeBookSystem.Labs
     {
         static void Main(string[] args)
         {
+            var lab1 = new LoadingData();
+            var dishesList = lab1.GetDishes();
+            foreach(var item in dishesList)
+            {
+                Console.WriteLine(item.Name);
+            }
+            Console.WriteLine();
+            Console.WriteLine($"email - {lab1.GetUsers().Email} name - {lab1.GetUsers().Name}");
+            Console.ReadKey();
         }
     }
 }
