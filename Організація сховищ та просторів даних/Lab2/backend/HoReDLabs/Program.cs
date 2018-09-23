@@ -10,8 +10,8 @@ namespace HoReDLabs
         static void Main(string[] args)
         {
             int labNumber;
-            Console.WriteLine("Input number of lab");
-            labNumber = Console.Read();
+            m: Console.WriteLine("Input number of lab");
+            labNumber = Convert.ToInt32(Console.ReadLine());
             var dbContext = new DbContext();
             Stopwatch sw = new Stopwatch();
             switch (labNumber)
@@ -23,7 +23,7 @@ namespace HoReDLabs
                         sw.Stop();
                         Console.WriteLine("star = {0}", sw.Elapsed);
 
-                        dbContext.SetConnectionString("MyConStringSTORE_NOTSTAR");
+                        dbContext.SetConnectionString("MyConStringSTORE_STAR");
                         sw.Reset();
 
                         var lab2Star = new Lab2Sevice(dbContext);
@@ -31,7 +31,6 @@ namespace HoReDLabs
                         lab2Star.GetFormInfo();
                         sw.Stop();
                         Console.WriteLine("snowflake = {0}", sw.Elapsed);
-                        Console.ReadKey();
                     break;
                 case 3:
                     dbContext.SetConnectionString("MyConString");
@@ -41,10 +40,14 @@ namespace HoReDLabs
                     sw.Start();
                     lab3NotStar.GetFormInfo();
                     sw.Stop();
-                    Console.WriteLine("star = {0}", sw.Elapsed);
+                    Console.WriteLine("time = {0}", sw.Elapsed);
+                    break;
+                default:
+                    Console.WriteLine("Input correct lab number");
                     break;
             };
-            
+            goto m;
+            Console.ReadKey();
         }
     }
 }

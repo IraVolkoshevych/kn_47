@@ -1,3 +1,9 @@
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'GETFORMS')
+BEGIN
+	DROP PROC GETFORMS
+END
+
+GO
 create procedure GETFORMS
 as
 select * from FORM 

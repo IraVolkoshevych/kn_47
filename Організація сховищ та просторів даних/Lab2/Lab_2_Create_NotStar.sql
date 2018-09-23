@@ -1,5 +1,5 @@
-/*drop database STORE_NOTSTAR;*/
-Create database STORE_NOTSTAR;
+/*drop database store;*/
+Create database STORE;
 create table FURNITURE_STORE (
 	idFURNITURE_STORE int not null identity(1,1),
 	Region varchar(25),
@@ -26,15 +26,26 @@ create table CLIENTS (
     Email varchar(25),
 	Primary key (idCLIENTS)
 );
+create table MANUFACTURER (
+	idMANUFACTURER int not null identity(1,1),
+	Region varchar(25),
+	City varchar(25),
+	Street varchar(25),
+    Email varchar(25),
+    Telephone_number int,
+	Primary key (idMANUFACTURER)
+);
 create table PRODUCT (
 	idPRODUCT int not null identity(1,1),
 	Name varchar(20),
 	Material varchar(25),
 	Price int,
 	Type varchar(25),
-	City varchar(25)
 	Primary key (idPRODUCT),
-	
+	idMANUFACTURER int not null,
+	foreign key (idMANUFACTURER)
+        references MANUFACTURER (idMANUFACTURER)
+        on delete no action on update no action
 );
 create table FORM (
 	    idFORM int not null identity(1,1),

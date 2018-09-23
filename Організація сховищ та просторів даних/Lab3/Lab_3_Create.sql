@@ -41,6 +41,7 @@ create table PRODUCT (
 	Price int,
 	Type varchar(25),
 	Primary key (idPRODUCT),
+	City varchar(25),
 	CreatedAt datetime DEFAULT GETDATE()
 );
 
