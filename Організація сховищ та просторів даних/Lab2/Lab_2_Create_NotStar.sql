@@ -1,4 +1,4 @@
-/*drop database store;*/
+/*drop database STORE_NOTSTAR;*/
 Create database STORE_NOTSTAR;
 create table FURNITURE_STORE (
 	idFURNITURE_STORE int not null identity(1,1),
