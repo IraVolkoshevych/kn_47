@@ -10,16 +10,21 @@ namespace HoReDLabs
         static void Main(string[] args)
         {
             var dbContext = new DbContext();
-            var lab2 = new Lab2Sevice(dbContext);
-            //DateTime start = DateTime.Now;
-            //lab2.GetFormInfo();
-            //TimeSpan timeItTook = DateTime.Now - start;
-            //Console.WriteLine(timeItTook);
+            var lab2NotStar = new Lab2Sevice(dbContext);
             Stopwatch sw = new Stopwatch();
             sw.Start();
-            lab2.GetFormInfo();
+            lab2NotStar.GetFormInfo();
             sw.Stop();
-            Console.WriteLine("Elapsed={0}", sw.Elapsed);
+            Console.WriteLine("star = {0}", sw.Elapsed);
+
+            dbContext.SetConnectionString("MyConStringSTORE_NOTSTAR");
+            sw.Reset();
+
+            var lab2Star = new Lab2Sevice(dbContext);
+            sw.Start();
+            lab2Star.GetFormInfo();
+            sw.Stop();
+            Console.WriteLine("snowflake = {0}", sw.Elapsed);
             Console.ReadKey();
         }
     }

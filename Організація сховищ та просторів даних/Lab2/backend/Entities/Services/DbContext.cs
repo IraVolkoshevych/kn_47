@@ -9,8 +9,12 @@ namespace Entities.Services
 {
     public class DbContext : IDbContext
     {
-        private readonly SqlConnection _myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyConString"].ConnectionString);
+        public SqlConnection _myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["MyConStringSTORE"].ConnectionString);
 
+        public void SetConnectionString(string connection)
+        {
+            _myConnection = new SqlConnection(ConfigurationManager.ConnectionStrings[connection].ConnectionString);
+        }
         public DbContext()
         {
           
