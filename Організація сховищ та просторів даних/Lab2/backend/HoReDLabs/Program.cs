@@ -16,12 +16,21 @@ namespace HoReDLabs
             Stopwatch sw = new Stopwatch();
             switch (labNumber)
             {
+                case 1:
+                    var lab1NotStar = new Lab2Sevice(dbContext);
+                    sw.Reset();
+                    sw.Start();
+                    lab1NotStar.GetFormInfo();
+                    sw.Stop();
+                    Console.WriteLine("time = {0}", sw.Elapsed);
+                    break;
                 case 2:
                         var lab2NotStar = new Lab2Sevice(dbContext);
+                        sw.Reset();
                         sw.Start();
                         lab2NotStar.GetFormInfo();
                         sw.Stop();
-                        Console.WriteLine("star = {0}", sw.Elapsed);
+                        Console.WriteLine("snowflake = {0}", sw.Elapsed);
 
                         dbContext.SetConnectionString("MyConStringSTORE_STAR");
                         sw.Reset();
@@ -30,7 +39,7 @@ namespace HoReDLabs
                         sw.Start();
                         lab2Star.GetFormInfo();
                         sw.Stop();
-                        Console.WriteLine("snowflake = {0}", sw.Elapsed);
+                        Console.WriteLine("star = {0}", sw.Elapsed);
                     break;
                 case 3:
                     dbContext.SetConnectionString("MyConString");
