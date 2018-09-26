@@ -1,8 +1,8 @@
-/*drop database STORE_3;*/
-Create database STORE_3;
+/*drop database STORE_3_1;*/
+Create database STORE_3_1;
 go 
 
-USE STORE_3
+USE STORE_3_1
 go 
 
 create table FURNITURE_STORE (

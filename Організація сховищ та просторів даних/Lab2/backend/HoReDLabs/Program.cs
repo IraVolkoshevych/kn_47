@@ -42,14 +42,22 @@ namespace HoReDLabs
                         Console.WriteLine("star = {0}", sw.Elapsed);
                     break;
                 case 3:
-                    dbContext.SetConnectionString("MyConString");
+                    dbContext.SetConnectionString("MyConStringSTORE_3_1");
                     var lab3NotStar = new Lab2Sevice(dbContext);
                     sw.Reset();
-
                     sw.Start();
                     lab3NotStar.GetFormInfo();
                     sw.Stop();
-                    Console.WriteLine("time = {0}", sw.Elapsed);
+                    Console.WriteLine("snowflake = {0}", sw.Elapsed);
+
+                    dbContext.SetConnectionString("MyConStringSTORE_3_2");
+                    sw.Reset();
+
+                    var lab3Star = new Lab2Sevice(dbContext);
+                    sw.Start();
+                    lab3Star.GetFormInfo();
+                    sw.Stop();
+                    Console.WriteLine("star = {0}", sw.Elapsed);
                     break;
                 default:
                     Console.WriteLine("Input correct lab number");
