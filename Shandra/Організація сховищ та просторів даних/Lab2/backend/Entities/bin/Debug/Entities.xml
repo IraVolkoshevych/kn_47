@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Entities</name>
+    </assembly>
+    <members>
+        <member name="T:Entities.Hashing">
+            <summary>
+            Hashing class implementing some methods for hashing password
+            </summary>
+        </member>
+        <member name="M:Entities.Hashing.GenerateSalt">
+            <summary>
+            Method for generating salt which then will be used in hashing method
+            </summary>
+            <returns>Returns salt.</returns>
+            
+        </member>
+        <member name="M:Entities.Hashing.HashingPassword(System.String)">
+            <summary>
+            Method for hashing password
+            </summary>
+            <param name="password">Password that needs to be hashed</param>
+            <returns>Returns hashed password as string</returns>
+        </member>
+        <member name="M:Entities.Hashing.VerifyPassword(System.String,System.String)">
+            <summary>
+            Method for verifying password
+            </summary>
+            <remarks>
+            Checks if password is equal to the one already hashed
+            </remarks>
+            <param name="password">Password</param>
+            <param name="hash">Already hashed password</param>
+            <returns>
+            Returns true (password and hash is equal) otherwise - false
+            </returns>
+        </member>
+        <member name="M:Entities.Services.DoctorService.GetDoctorBookedEventsForDoctor(System.Int32,System.DateTime,System.DateTime)">
+            <summary>
+            Almost equal for GetDoctorBookedEvents, although returns also name,surname and id of patient, that booked smth relevant session in schedule
+            </summary>
+            <param name="IdDoctor"></param>
+            <param name="dateStart"></param>
+            <param name="dateFinish"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Entities.Services.DoctorService.GeneralEventsListFillUserData(System.Collections.Generic.List{System.Tuple{Entities.Event,Entities.User}})">
+            <summary>
+            Fills Users' firstname and lastname, based on their Id
+            </summary>
+            <param name="general"></param>
+            <returns></returns>
+        </member>
+        <member name="F:Entities.Services.EmailNotificationService.SmtpClientPort">
+            <summary>
+            Port for SmtpClient.
+            </summary>
+        </member>
+        <member name="F:Entities.Services.EmailNotificationService.SmtpClientHost">
+            <summary>
+            Host for SmtpClient.
+            </summary>
+        </member>
+        <member name="T:Entities.Services.EmailNotificationService.Credentials">
+            <summary>
+            Credentials that are used for sending emails.
+            </summary>
+        </member>
+        <member name="T:Entities.Services.IMembershipProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Entities.Services.IMembershipProvider.GetUserClaims(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="username"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Entities.Services.MembershipProvider">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:Entities.Services.MembershipProvider.GetUserClaims(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="email"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Entities.Services.MembershipProvider.VerifyUserPassword(System.String,System.String)">
+            <summary>
+            
+            </summary>
+            <param name="email"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:Entities.Utils.ParseSqlQuery.GetDoctorBookedEventsForDoctor(System.String)" -->
+        <member name="M:Entities.Utils.ParseSqlQuery.GetAllUserInfo(System.String)">
+            <summary>
+            Returns basic info about user
+            </summary>
+            <param name="str">Received Query</param>
+            <returns>UserInfo object</returns>
+        </member>
+    </members>
+</doc>
