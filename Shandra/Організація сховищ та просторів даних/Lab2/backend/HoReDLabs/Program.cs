@@ -42,7 +42,7 @@ namespace HoReDLabs
                         Console.WriteLine("star = {0}", sw.Elapsed);
                     break;
                 case 3:
-                    dbContext.SetConnectionString("MyConStringSTORE_3_2");
+                    dbContext.SetConnectionString("MyConStringTAXI_3_2");
                     var lab3NotStar = new Lab2Sevice(dbContext);
                     sw.Reset();
                     sw.Start();
@@ -50,7 +50,7 @@ namespace HoReDLabs
                     sw.Stop();
                     Console.WriteLine("snowflake = {0}", sw.Elapsed);
 
-                    dbContext.SetConnectionString("MyConStringSTORE_3_1");
+                    dbContext.SetConnectionString("MyConStringTAXI_3_1");
                     sw.Reset();
 
                     var lab3Star = new Lab2Sevice(dbContext);
@@ -64,7 +64,6 @@ namespace HoReDLabs
                     break;
             };
             goto m;
-            Console.ReadKey();
         }
     }
 }
