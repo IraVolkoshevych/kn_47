@@ -37,13 +37,6 @@ insert into clients	values
 ('Tirion','Tckach','Pavlivna','0935982130','lanister@ukr.net');
 
 
-insert into manufacturer values
-('Kyiv', 'Kyiv', 'Budivelnykiv, 8', 'realf@mail.ru', '0956436312'),
-('Lviv', 'Lvivv', 'Bandery, 15', 'creative m@mail.ru', '0982631248'),
-('Rivne', 'Rivne', 'Lukasha, 5', 'niceMf@mail.ru', '0503567842'),
-('Ternopil', 'Ternopil', 'Boguna, 82', 'bestOfTheBest@mail.ru', '0675235972'),
-('Odessa', 'Odessa', 'Ivanova, 23', 'coolM@mail.ru', '0965823648');
-
 insert into CAR values
 ('BMV',		399000,  1),
 ('Audi',	51690, 1),
