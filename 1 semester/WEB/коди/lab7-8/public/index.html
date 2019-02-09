@@ -1,0 +1,29 @@
+<html> 
+    <head> 
+        <script language="JavaScript" src="jquery-3.3.1.min.js"></script>
+        <script language="JavaScript" src="script.js"></script> 
+    </head> 
+    <body> 
+        Уркраїнська - English
+        <form style="margin-bottom: 100px"> 
+            <input id="ua_word"/>
+            <input type="button" onclick="translate_ua()" value="Перекласти">
+            <input type="button" onclick="delete_ua()" value="Видалити">
+            <br/><br/>
+            Переклад:
+            <input id="ua_word_translate"/>
+            <input type="button" onclick="add_ua()" value="Додати в словник">
+        </form>
+
+        English - Уркраїнська
+        <form>
+            <input id="en_word"/>
+            <input type="button" onclick="translate_en()" value="Перекласти">
+            <input type="button" onclick="delete_en()" value="Видалити">
+            <br/><br/>
+            Переклад: 
+            <input id="en_word_translate"/>
+            <input type="button" onclick="add_en()" value="Додати в словник">
+        </form>
+    </body> 
+</html>

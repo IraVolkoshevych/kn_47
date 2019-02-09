@@ -1,0 +1,121 @@
+<html> 
+    <head> 
+    </head> 
+    <body> 
+        <form> 
+            <label>КН-103</label><br/>
+            <a href="http://lp.edu.ua/students_schedule?institutecode_selective=%D0%86%D0%9A%D0%9D%D0%86&edugrupabr_selective=%D0%9A%D0%9D-103">Перейти до джерела</a><br/>
+            <input type="text" id="dateTime">
+            <input type="button" onClick="check()" value="Перевірити розклад">
+        </form> 
+    </body> 
+    <footer>
+        <script> 
+            document.getElementById("dateTime").value = (new Date()).toLocaleString();
+
+            var scedule = [
+                [], 
+
+                [ 
+                    "Фізичне виховання, частина 1, Практична",
+                    "Математичний аналіз, частина 1 Баранецький Я.О., 211 I н.к.,  Практична",
+                    "Математичний аналіз, частина 1 Баранецький Я.О., 217 Гол. н.к.,  Лекція"
+                ],
+                 
+                [ 
+                    "Іноземна мова за професійним спрямуванням, частина1 Сидорчук О.В., 12а VII н.к.,  Практична",
+                    "Алгоритмізація та програмування, частина 1 Процько І.О., 802а V н.к.,  Практична",
+                    "Алгоритмізація та програмування, частина 1 Шпак З.Я., 117 I н.к.,  Лекція"
+                ], 
+
+                [  
+                    "Лінійна алгебра та аналітична геометрія Ільків В.С., 217 I н.к.,  Лекція",
+                    "Дискретна математика Зербіно Д.Д., 804а V н.к.,  Лабораторна",
+                    "Дискретна математика Зербіно Д.Д., 210 IV н.к.,  Лекція",
+                    "Історія державності та культури України Вербицька П.В., 217 I н.к.,  Лекція"
+                ], 
+
+                [ 
+                    "Алгоритмізація та програмування, частина 1 Сидоренко Р.В., 511 V н.к.,  Лабораторна",
+                    "Алгоритмізація та програмування, частина 1 Шпак З.Я., 117 I н.к.,  Лекція",
+                    "Математичний аналіз, частина 1 Баранецький Я.О., 117 I н.к.,  Лекція",
+                    "Лінійна алгебра та аналітична геометрія Ільків В.С., 403 I н.к.,  Практична"
+                ], 
+                
+                [ 
+                    "Дискретна математика Зербіно Д.Д.,  116 I н.к.,  Лекція",
+                    "Алгоритмізація та програмування, частина 1 Сидоренко Р.В., 511 V н.к.,  Лабораторна",
+                    "Історія державності та культури України Камінска О.З., 309 V н.к.,  Практична"
+                ],
+
+                [] 
+            ];
+
+            function getPairNumber(hour, minutes){
+                var workingTimes = [
+                    { fromHour: 8 , fromMinutes: 30, toHour: 10, toMinutes: 05 },
+                    { fromHour: 10, fromMinutes: 20, toHour: 11, toMinutes: 55 },
+                    { fromHour: 12, fromMinutes: 10, toHour: 13, toMinutes: 45 },
+                    { fromHour: 14, fromMinutes: 15, toHour: 15, toMinutes: 50 },
+                    { fromHour: 16, fromMinutes: 00, toHour: 17, toMinutes: 35 }
+                ];
+
+                for(var i = 0; i < workingTimes.length; i++){
+                    if(hour == workingTimes[i].fromHour){
+                        if(minutes >= workingTimes[i].fromMinutes){
+                            return i;
+                        }
+                    }
+
+                    if(hour == workingTimes[i].toHour){
+                        if(minutes <= workingTimes[i].toMinutes){
+                            return i;
+                        }
+                    }
+                }
+
+                return -1;
+            }
+
+            function getWorkingProccesNameByDate(dateTime){
+                var day  = dateTime.getDay();
+                
+                //0 - неділя
+                if(day == 0 || day == 6){
+                    return "Вихідний.";
+                }
+
+                var hour = dateTime.getHours();
+                var minute = dateTime.getMinutes();
+
+                var workNumber = getPairNumber(hour, minute);
+
+                if(workNumber == -1){
+                    return "Немає пари.";
+                }
+
+                var workName = scedule[day][workNumber];
+                if(!workName){
+                    return "Немає пари.";
+                }
+                else{
+                    return workName;
+                }
+            }
+
+            function check() {
+                alert(getWorkingProccesNameByDate(parseDate(document.getElementById("dateTime").value)));
+            }
+
+            function parseDate(input) {
+                var parts = input.split(", ");
+                var datePart = parts[0].split(".");
+                var timePart = parts[1].split(":");
+                
+                return new Date(datePart[2], datePart[1]-1, datePart[0], timePart[0], timePart[1], timePart[2]); 
+            }
+
+            alert(getWorkingProccesNameByDate(new Date()));
+        </script> 
+    </footer>
+</html> 

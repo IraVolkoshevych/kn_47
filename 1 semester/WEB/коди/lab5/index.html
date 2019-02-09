@@ -1,0 +1,61 @@
+<html> 
+    <head> 
+        <script> 
+        var rows, columns; 
+        function build() 
+        { 
+            rows = parseInt(form.rowsCount.value); 
+            columns = parseInt(form.columnsCount.value); 
+            var table = "<table>\n"; 
+            for(var i=1;i<=rows;i++) 
+            { 
+                table+="<tr>\n"; 
+                for(var j=1;j<=columns;j++) 
+                { 
+                    table += "<td>"; 
+                    var id = "_" + i + "_" + j;
+                    var currentValue = 2 * i + 13 * j;
+                    table += "<input type=\"text\" id=\"" + id + "\" value=\"" + currentValue + "\">"; 
+                    table += "<\/td>\n"; 
+                } 
+                table+="<\/tr>\n"; 
+            }
+            table += "<\/table>";
+            main.innerHTML = table; 
+        } 
+        function calculate() 
+        { 
+            var result = 0;
+            
+            var countOfElementsForSum = rows < columns ? rows : columns;
+
+            for(var i = 1;i <= countOfElementsForSum; i++)
+            { 
+                var currentValue = document.getElementById("_" + i + "_" + i).value;
+                result += parseInt(currentValue);
+            } 
+            
+            alert("Сума елементів головної діагоналі = " + result);
+        } 
+      </script> 
+    </head> 
+    <body> 
+        <form id = "form"> 
+            <table> 
+                <tr> 
+                    <td>Кількість рядків</td> 
+                    <td><input type="text" id = "rowsCount" value="3"></td>
+                </tr>
+                <tr>
+                    <td> Кількість стовпців</td> 
+                    <td><input type="text" id = "columnsCount" value="3"></td>
+                </tr> 
+                <tr> 
+                    <td><input type = "button" onClick = "build()" value = "Побудувати матрицю"><br>                       
+                    <td> <input type = "button" onClick = "calculate()" value = "Здійснити обчислення"> <td> 
+                </tr> 
+            </table> 
+            <div id = "main"></div> 
+        </form> 
+    </body> 
+</html> 

@@ -1,1 +1,0 @@
-alert("Ivanov Vadym Bogdanovych, KN-47, VK 10966682\nUsing related files.");
