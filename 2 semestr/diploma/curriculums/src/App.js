@@ -1,8 +1,17 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 class App extends Component {
+  loadData(){
+    debugger;
+    axios.get("http://localhost:61735/api/GetCoursesInfoList/2")
+    .then((response) =>{
+      console.log(response);
+    })
+  }
+
   render() {
     return (
       <div className="App">
@@ -19,6 +28,7 @@ class App extends Component {
           >
             Learn React
           </a>
+          <button onClick={this.loadData}>loadData</button>
         </header>
       </div>
     );
