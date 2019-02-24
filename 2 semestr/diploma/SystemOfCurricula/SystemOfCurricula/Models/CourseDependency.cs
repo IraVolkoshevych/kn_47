@@ -13,7 +13,7 @@ namespace SystemOfCurricula.Models
 
         public int StartCourseID { get; set; }
 
-        public int DependentSourseID { get; set; }
+        public int DependentCourseID { get; set; }
 
         public virtual Course Course { get; set; }
 

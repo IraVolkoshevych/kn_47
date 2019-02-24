@@ -37,4 +37,4 @@ Semestr int not null);
 create table CourseDependency(
 CourseDependencyID int identity(1,1) primary key not null,
 StartCourseID int foreign key references Course(CourseID) not null,
-DependentSourseID int foreign key references Course(CourseID) not null);
+DependentCourseID int foreign key references Course(CourseID) not null);

@@ -9,6 +9,8 @@ namespace SystemOfCurricula.Services
 {
     public static class CurricilaService
     {
+
+        //Update this one, need to remomove redundant properties from CourseInfoDTO
         public static IList<CourseInfoDTO> LoadCoursesInfoForPlan(int specialityId)
         {
             using (var dbContext = new SystemOfCurriculaContext())
@@ -36,6 +38,56 @@ namespace SystemOfCurricula.Services
                                    CourseCredit = course.CourseCredit,
                                    CourseWorkCredit = course.CourseWorkCredit,
                                    IsOnlyPractice = course.IsOnlyPractice
+                               }).ToList();
+
+                return courses;
+            }
+        }
+
+        public static IList<CourseDependentDTO> LoadStartCourses(int courseId)
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var courses = (from startSubject in dbContext.Subject
+                               join startCourse in dbContext.Course 
+                                    on startSubject.SubjectID equals startCourse.SubjectID
+                               join courseDependency in dbContext.CourseDependency 
+                                    on startCourse.CourseID equals courseDependency.StartCourseID
+                               join dependentCourse in dbContext.Course
+                                    on courseDependency.DependentCourseID equals dependentCourse.CourseID
+                               where dependentCourse.CourseID == courseId
+                               select new CourseDependentDTO()
+                               {
+                                   SubjectName = startSubject.SubjectName,
+                                   SubjectType = startSubject.SubjectType,
+                                   Semestr = startCourse.Semestr,
+                                   CourseCredit = startCourse.CourseCredit,
+                                   IsStartCourse = true
+                               }).ToList();
+
+                return courses;
+            }              
+        }
+
+        public static IList<CourseDependentDTO> LoadDependentCourses(int courseId)
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var courses = (from startCourse in dbContext.Course
+                               join courseDependency in dbContext.CourseDependency
+                                    on startCourse.CourseID equals courseDependency.StartCourseID
+                               join dependentCourse in dbContext.Course
+                                    on courseDependency.DependentCourseID equals dependentCourse.CourseID
+                               join dependentSubject in dbContext.Subject
+                                    on dependentCourse.SubjectID equals dependentSubject.SubjectID
+                               where startCourse.CourseID == courseId
+                               select new CourseDependentDTO()
+                               {
+                                   SubjectName = dependentSubject.SubjectName,
+                                   SubjectType = dependentSubject.SubjectType,
+                                   Semestr = dependentCourse.Semestr,
+                                   CourseCredit = dependentCourse.CourseCredit,
+                                   IsStartCourse = false
                                }).ToList();
 
                 return courses;

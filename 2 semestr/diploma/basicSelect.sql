@@ -28,16 +28,17 @@ SELECT
 	startSubject.SubjectName AS StartSubjectName,
 	startCourse.Semestr AS StartSemestr,
 	dependentSubject.SubjectName AS DependentSubjectName,
-	dependentCorse.Semestr AS DependentSemestr
+	dependentCourse.Semestr AS DependentSemestr
 FROM
 CourseDependency INNER JOIN Course startCourse
 ON CourseDependency.StartCourseID = startCourse.CourseID
 INNER JOIN Subject startSubject
 ON startSubject.SubjectID = startCourse.SubjectID
-INNER JOIN Course dependentCorse
-ON CourseDependency.DependentSourseID = dependentCorse.CourseID
+INNER JOIN Course dependentCourse
+ON CourseDependency.DependentCourseID = dependentCourse.CourseID
 INNER JOIN Subject dependentSubject
-ON dependentSubject.SubjectID = dependentCorse.SubjectID
+ON dependentSubject.SubjectID = dependentCourse.SubjectID
 --addition condition
-WHERE StartCourseID = 16
-	OR DependentSourseID = 16;
+WHERE --StartCourseID = 16
+	--OR 
+	DependentCourseID = 16;

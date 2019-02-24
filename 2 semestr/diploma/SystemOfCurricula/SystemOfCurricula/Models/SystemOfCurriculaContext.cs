@@ -23,7 +23,7 @@ namespace SystemOfCurricula.Models
             modelBuilder.Entity<Course>()
                 .HasMany(e => e.CourseDependency)
                 .WithRequired(e => e.Course)
-                .HasForeignKey(e => e.DependentSourseID)
+                .HasForeignKey(e => e.DependentCourseID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Course>()

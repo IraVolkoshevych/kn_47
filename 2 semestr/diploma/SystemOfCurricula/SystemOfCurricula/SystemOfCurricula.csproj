@@ -192,6 +192,7 @@
     </Compile>
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\CourseDependency.cs" />
+    <Compile Include="Models\DTOs\CourseDependentDTO.cs" />
     <Compile Include="Models\DTOs\CourseInfoDTO.cs" />
     <Compile Include="Models\Speciality.cs" />
     <Compile Include="Models\Subject.cs" />
