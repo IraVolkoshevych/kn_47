@@ -1,4 +1,6 @@
+-- get courses info
 SELECT 
+	Subject.SubjectID,
 	Course.Semestr,
 	Subject.SubjectName,
 	lecturer.TeacherFirstName AS LecturerFirstName,
@@ -20,3 +22,22 @@ INNER JOIN Teacher lecturer
 ON lecturer.TeacherID = Course.Lecturer
 INNER JOIN Teacher assistant
 ON assistant.TeacherID = Course.Assistant
+
+--get course dependency info
+SELECT 
+	startSubject.SubjectName AS StartSubjectName,
+	startCourse.Semestr AS StartSemestr,
+	dependentSubject.SubjectName AS DependentSubjectName,
+	dependentCorse.Semestr AS DependentSemestr
+FROM
+CourseDependency INNER JOIN Course startCourse
+ON CourseDependency.StartCourseID = startCourse.CourseID
+INNER JOIN Subject startSubject
+ON startSubject.SubjectID = startCourse.SubjectID
+INNER JOIN Course dependentCorse
+ON CourseDependency.DependentSourseID = dependentCorse.CourseID
+INNER JOIN Subject dependentSubject
+ON dependentSubject.SubjectID = dependentCorse.SubjectID
+--addition condition
+WHERE StartCourseID = 16
+	OR DependentSourseID = 16;
