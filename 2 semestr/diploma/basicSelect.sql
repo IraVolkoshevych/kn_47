@@ -39,6 +39,6 @@ ON CourseDependency.DependentCourseID = dependentCourse.CourseID
 INNER JOIN Subject dependentSubject
 ON dependentSubject.SubjectID = dependentCourse.SubjectID
 --addition condition
-WHERE --StartCourseID = 16
-	--OR 
+WHERE StartCourseID = 16
+	OR 
 	DependentCourseID = 16;
