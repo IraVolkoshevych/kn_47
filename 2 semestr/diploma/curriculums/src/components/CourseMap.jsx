@@ -5,6 +5,9 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Button from '@material-ui/core/Button';
+import purple from '@material-ui/core/colors/purple';
+import green from '@material-ui/core/colors/green';
 import "./CourseMap.css"
 let id = 0;
 
@@ -42,7 +45,7 @@ class CourseMap extends React.Component {
           this.setState({
               courses:response.data
           });
-          
+
           this.preparedDataForTable();
         })
     }
@@ -136,14 +139,70 @@ class CourseMap extends React.Component {
               <TableBody>
                 {this.state.rows.map(row => (
                   <TableRow key={row.id}>
-                    <TableCell>{row.firstSemestr}</TableCell>
-                    <TableCell>{row.secondSemestr}</TableCell>
-                    <TableCell>{row.thirdSemestr}</TableCell>
-                    <TableCell>{row.fourthSemestr}</TableCell>
-                    <TableCell>{row.fifthSemestr}</TableCell>
-                    <TableCell>{row.sixthSemestr}</TableCell>
-                    <TableCell>{row.seventhSemestr}</TableCell>
-                    <TableCell>{row.eighthSemestr}</TableCell>
+                    <TableCell>{
+                        row.firstSemestr ?   
+                        <Button variant="contained" color="primary" >
+                            {row.firstSemestr}
+                        </Button>
+                        : ""
+                    }
+                    </TableCell>
+                    <TableCell>{
+                        row.secondSemestr ?   
+                        <Button variant="contained" color="primary" >
+                            {row.secondSemestr}
+                        </Button>
+                        : ""
+                    }
+                    </TableCell>
+                    <TableCell>{
+                        row.thirdSemestr ?   
+                        <Button variant="contained" color="primary" >
+                            {row.thirdSemestr}
+                        </Button>
+                        : ""
+                    }
+                    </TableCell>
+                    <TableCell>{
+                        row.fourthSemestr ?   
+                        <Button variant="contained" color="primary" >
+                            {row.fourthSemestr}
+                        </Button>
+                        : ""
+                    }
+                    </TableCell>
+                    <TableCell>{
+                        row.fifthSemestr ?   
+                        <Button variant="contained" color="primary" >
+                            {row.fifthSemestr}
+                        </Button>
+                        : ""
+                    }
+                    </TableCell>
+                    <TableCell>{
+                        row.sixthSemestr ?   
+                        <Button variant="contained" color="primary" >
+                            {row.sixthSemestr}
+                        </Button>
+                        : ""
+                    }
+                    </TableCell>
+                    <TableCell>{
+                        row.seventhSemestr ?   
+                        <Button variant="contained" color="primary" >
+                            {row.seventhSemestr}
+                        </Button>
+                        : ""
+                    }
+                    </TableCell>
+                    <TableCell>{
+                        row.eighthSemestr ?   
+                        <Button variant="contained" color="primary" >
+                            {row.eighthSemestr}
+                        </Button>
+                        : ""
+                    }
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
