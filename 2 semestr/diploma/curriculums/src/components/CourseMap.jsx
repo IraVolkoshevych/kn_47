@@ -139,65 +139,65 @@ class CourseMap extends React.Component {
               <TableBody>
                 {this.state.rows.map(row => (
                   <TableRow key={row.id}>
-                    <TableCell>{
+                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
                         row.firstSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
                             {row.firstSemestr}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell>{
+                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
                         row.secondSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
                             {row.secondSemestr}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell>{
+                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
                         row.thirdSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
                             {row.thirdSemestr}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell>{
+                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
                         row.fourthSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
                             {row.fourthSemestr}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell>{
+                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
                         row.fifthSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
                             {row.fifthSemestr}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell>{
+                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
                         row.sixthSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px', paddingRight: '16px' }} size="small">
                             {row.sixthSemestr}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell>{
+                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
                         row.seventhSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
                             {row.seventhSemestr}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell>{
+                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
                         row.eighthSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
                             {row.eighthSemestr}
                         </Button>
                         : ""
