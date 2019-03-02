@@ -141,7 +141,7 @@ class CourseMap extends React.Component {
                   <TableRow key={row.id}>
                     <TableCell>{
                         row.firstSemestr ?   
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
                             {row.firstSemestr}
                         </Button>
                         : ""
@@ -149,7 +149,7 @@ class CourseMap extends React.Component {
                     </TableCell>
                     <TableCell>{
                         row.secondSemestr ?   
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
                             {row.secondSemestr}
                         </Button>
                         : ""
@@ -157,7 +157,7 @@ class CourseMap extends React.Component {
                     </TableCell>
                     <TableCell>{
                         row.thirdSemestr ?   
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
                             {row.thirdSemestr}
                         </Button>
                         : ""
@@ -165,7 +165,7 @@ class CourseMap extends React.Component {
                     </TableCell>
                     <TableCell>{
                         row.fourthSemestr ?   
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
                             {row.fourthSemestr}
                         </Button>
                         : ""
@@ -173,7 +173,7 @@ class CourseMap extends React.Component {
                     </TableCell>
                     <TableCell>{
                         row.fifthSemestr ?   
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
                             {row.fifthSemestr}
                         </Button>
                         : ""
@@ -181,7 +181,7 @@ class CourseMap extends React.Component {
                     </TableCell>
                     <TableCell>{
                         row.sixthSemestr ?   
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
                             {row.sixthSemestr}
                         </Button>
                         : ""
@@ -189,7 +189,7 @@ class CourseMap extends React.Component {
                     </TableCell>
                     <TableCell>{
                         row.seventhSemestr ?   
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
                             {row.seventhSemestr}
                         </Button>
                         : ""
@@ -197,7 +197,7 @@ class CourseMap extends React.Component {
                     </TableCell>
                     <TableCell>{
                         row.eighthSemestr ?   
-                        <Button variant="contained" color="primary" >
+                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }}>
                             {row.eighthSemestr}
                         </Button>
                         : ""
