@@ -44,6 +44,8 @@ class DisciplineInfo extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="customized-dialog-title"
           open={this.props.isOpen}
+          maxWidth="false"
+          style={{width: 750}}
         >
           <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
             {this.props.courseName}
@@ -52,34 +54,34 @@ class DisciplineInfo extends React.Component {
             <Typography gutterBottom>
               {this.props.modalText}
             </Typography>
-              {
-                StartCourses.map(course =>
-                  <Button color="primary">
-                    { course }
-                  </Button>)
-              }<br/>
-              <div className="d-flex justify-content-center">
-                <img src={arrow} alt="Arrow" height="42" width="42"/><br/>
-              </div>
-              <Typography className="d-flex justify-content-center" gutterBottom>
+            <span className="d-flex justify-content-center">
+            {
+              StartCourses.map(course =>
+                <Button color="primary">
+                  { course }
+                </Button>)
+            }
+            </span><br/>
+            <div className="d-flex justify-content-center">
+              <img src={arrow} alt="Arrow" height="42" width="42"/><br/>
+            </div>
+            <Typography className="d-flex justify-content-center" gutterBottom>
+              <Button variant="contained" color="secondary">
                 {this.props.courseName}
-              </Typography><br/>
-              <div className="d-flex justify-content-center">
-                <img src={arrow} alt="Arrow" height="42" width="42"/><br/>
-              </div><br/>
-              {
-                DependentCourses.map(course =>
-                  <Button color="primary">
-                    { course }
-                  </Button>)
-              }
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Save changes
-            </Button>
-          </DialogActions>
-        </Dialog>
+                </Button>
+            </Typography><br/>
+            <div className="d-flex justify-content-center">
+              <img src={arrow} alt="Arrow" height="42" width="42"/><br/>
+            </div><br/>
+            <span className="d-flex justify-content-center">
+            {
+              DependentCourses.map(course =>
+                <Button color="primary">
+                  { course }
+                </Button>)
+            }
+            </span>
+          </DialogContent>        </Dialog>
       </div>
     );
   }
