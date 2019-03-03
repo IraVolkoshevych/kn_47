@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import arrow from '../images/arrow.png';
 
 class DisciplineInfo extends React.Component {
   constructor(props){
@@ -51,14 +52,21 @@ class DisciplineInfo extends React.Component {
             <Typography gutterBottom>
               {this.props.modalText}
             </Typography>
-              StartCourses<br/>
               {
                 StartCourses.map(course =>
                   <Button color="primary">
                     { course }
                   </Button>)
-              }
-              <br/>DependentCourses<br/>
+              }<br/>
+              <div className="d-flex justify-content-center">
+                <img src={arrow} alt="Arrow" height="42" width="42"/><br/>
+              </div>
+              <Typography className="d-flex justify-content-center" gutterBottom>
+                {this.props.courseName}
+              </Typography><br/>
+              <div className="d-flex justify-content-center">
+                <img src={arrow} alt="Arrow" height="42" width="42"/><br/>
+              </div><br/>
               {
                 DependentCourses.map(course =>
                   <Button color="primary">
