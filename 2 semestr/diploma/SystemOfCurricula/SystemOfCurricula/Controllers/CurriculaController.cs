@@ -47,5 +47,14 @@ namespace SystemOfCurricula.Controllers
 
             return Ok(courseDependencies);
         }
+
+        [Route("api/GetCourseInfo/{courseId}")]
+        [HttpGet]
+        public IHttpActionResult GetCourseInfo(int courseId)
+        {
+            var courseInfo = CurricilaService.LoadCourseInfo(courseId);
+
+            return Ok(courseInfo);
+        }
     }
 }

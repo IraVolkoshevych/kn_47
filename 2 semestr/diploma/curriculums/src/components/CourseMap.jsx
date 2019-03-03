@@ -8,6 +8,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
+import DisciplineInfo from './DisciplineInfo';
 import "./CourseMap.css"
 let id = 0;
 
@@ -29,16 +30,30 @@ class CourseMap extends React.Component {
         super();
         this.state ={
             courses : [],
-            rows : []
+            rows : [],
+            selectedCourseId : 0,
+            isOpenModal: false,
+            selectedCourseInfo : null
         }
 
         this.loadData();
 
         this.preparedDataForTable();
+        this.openModal = this.openModal.bind(this);
+        this.setModalVisibility = this.setModalVisibility.bind(this);
+        this.loadCourseInfo = this.loadCourseInfo.bind(this);
+    }
+
+    loadCourseInfo(courseId){
+        axios.get("http://localhost:61735/api/GetCourseInfo/" + courseId)
+            .then((response) =>{
+                this.setState({
+                    selectedCourseInfo :response.data
+                });
+            }); 
     }
 
     loadData(){
-        debugger;
         axios.get("http://localhost:61735/api/GetCoursesInfoList/2")
         .then((response) =>{
           console.log(response);
@@ -47,7 +62,24 @@ class CourseMap extends React.Component {
           });
 
           this.preparedDataForTable();
-        })
+        });
+    }
+
+    openModal(event){
+        axios.get("http://localhost:61735/api/GetCourseInfo/" + event.currentTarget.value)
+            .then((response) =>{
+                this.setState({
+                    selectedCourseInfo : response.data,
+                    isOpenModal : true,
+                    selectedCourseId : event.currentTarget.value
+                });
+            });
+    }
+
+    setModalVisibility(isOpen){
+        this.setState({
+            isOpenModal : isOpen
+        });
     }
 
     preparedDataForTable(){
@@ -108,19 +140,53 @@ class CourseMap extends React.Component {
     createRow(rowId, firstSemestr, secondSemestr, thirdSemestr, fourthSemestr, fifthSemestr, sixthSemestr, seventhSemestr, eighthSemestr){
         return {
             id : rowId,
-            firstSemestr : firstSemestr[rowId] ? firstSemestr[rowId].SubjectName : "",
-            secondSemestr : secondSemestr[rowId] ? secondSemestr[rowId].SubjectName : "",
-            thirdSemestr : thirdSemestr[rowId] ? thirdSemestr[rowId].SubjectName : "",
-            fourthSemestr : fourthSemestr[rowId] ? fourthSemestr[rowId].SubjectName : "",
-            fifthSemestr : fifthSemestr[rowId] ? fifthSemestr[rowId].SubjectName : "",
-            sixthSemestr : sixthSemestr[rowId] ? sixthSemestr[rowId].SubjectName : "",
-            seventhSemestr : seventhSemestr[rowId] ? seventhSemestr[rowId].SubjectName : "",
-            eighthSemestr : eighthSemestr[rowId] ? eighthSemestr[rowId].SubjectName : ""
+            firstSemestr : {
+                CourseID : firstSemestr[rowId] ? firstSemestr[rowId].CourseID : undefined,
+                CourseName : firstSemestr[rowId] ? firstSemestr[rowId].CourseName : "",
+            },
+            secondSemestr : {
+                CourseID : secondSemestr[rowId] ? secondSemestr[rowId].CourseID : undefined,
+                CourseName : secondSemestr[rowId] ? secondSemestr[rowId].CourseName : ""
+            },
+            thirdSemestr : {
+                CourseID : thirdSemestr[rowId] ? thirdSemestr[rowId].CourseID : undefined,
+                CourseName : thirdSemestr[rowId] ? thirdSemestr[rowId].CourseName : ""
+            },
+            fourthSemestr : {
+                CourseID : fourthSemestr[rowId] ? fourthSemestr[rowId].CourseID : undefined,
+                CourseName : fourthSemestr[rowId] ? fourthSemestr[rowId].CourseName : ""
+            },
+            fifthSemestr : {
+                CourseID : fifthSemestr[rowId] ? fifthSemestr[rowId].CourseID : undefined,
+                CourseName : fifthSemestr[rowId] ? fifthSemestr[rowId].CourseName : ""
+            },
+            sixthSemestr : {
+                CourseID : sixthSemestr[rowId] ? sixthSemestr[rowId].CourseID : undefined,
+                CourseName : sixthSemestr[rowId] ? sixthSemestr[rowId].CourseName : ""
+            },
+            seventhSemestr : {
+                CourseID : seventhSemestr[rowId] ? seventhSemestr[rowId].CourseID : undefined,
+                CourseName : seventhSemestr[rowId] ? seventhSemestr[rowId].CourseName : ""
+            },
+            eighthSemestr : {
+                CourseID : eighthSemestr[rowId] ? eighthSemestr[rowId].CourseID : undefined,
+                CourseName : eighthSemestr[rowId] ? eighthSemestr[rowId].CourseName : ""
+            }
         }
     }
 
     render(){
+        let cellStyle = {
+            padding: '6px 18px 6px 14px'
+        }
+
         console.log(this.state.courses)
+        let info = this.state.selectedCourseInfo;
+
+        let modalText = info ? info.CourseName+ " " + info.LecturerDegree + " " + info.LecturerAcademicStatus
+                        + " каф. " + info.LecturerDepartment + " " + info.LecturerFirstName + " " + info.LecturerLastName 
+                        : "";
+                        
         return(
             <div className="coursemap col-10">
             <Table>
@@ -139,66 +205,122 @@ class CourseMap extends React.Component {
               <TableBody>
                 {this.state.rows.map(row => (
                   <TableRow key={row.id}>
-                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
-                        row.firstSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
-                            {row.firstSemestr}
+                    <TableCell style={cellStyle}>{
+                        row.firstSemestr.CourseID ?   
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            style={{ fontSize: '10px' }} 
+                            size="small"
+                            value={row.firstSemestr.CourseID}
+                            onClick={this.openModal}
+                        >
+                            {row.firstSemestr.CourseName}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
-                        row.secondSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
-                            {row.secondSemestr}
+                    <TableCell style={cellStyle}>{
+                        row.secondSemestr.CourseID ?   
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            style={{ fontSize: '10px' }} 
+                            size="small"
+                            value={row.secondSemestr.CourseID}
+                            onClick={this.openModal}
+                        >
+                            {row.secondSemestr.CourseName}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
-                        row.thirdSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
-                            {row.thirdSemestr}
+                    <TableCell style={cellStyle}>{
+                        row.thirdSemestr.CourseID ?   
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            style={{ fontSize: '10px' }} 
+                            size="small"
+                            value={row.thirdSemestr.CourseID}
+                            onClick={this.openModal}
+                        >
+                            {row.thirdSemestr.CourseName}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
-                        row.fourthSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
-                            {row.fourthSemestr}
+                    <TableCell style={cellStyle}>{
+                        row.fourthSemestr.CourseID ?   
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            style={{ fontSize: '10px' }} 
+                            size="small"
+                            value={row.fourthSemestr.CourseID}
+                            onClick={this.openModal}
+                        >
+                            {row.fourthSemestr.CourseName}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
-                        row.fifthSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
-                            {row.fifthSemestr}
+                    <TableCell style={cellStyle}>{
+                        row.fifthSemestr.CourseID ?   
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            style={{ fontSize: '10px' }} 
+                            size="small"
+                            value={row.fifthSemestr.CourseID}
+                            onClick={this.openModal}
+                        >
+                            {row.fifthSemestr.CourseName}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
-                        row.sixthSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px', paddingRight: '16px' }} size="small">
-                            {row.sixthSemestr}
+                    <TableCell style={cellStyle}>{
+                        row.sixthSemestr.CourseID ?   
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            style={{ fontSize: '10px' }} 
+                            size="small"
+                            value={row.sixthSemestr.CourseID}
+                            onClick={this.openModal}
+                        >
+                            {row.sixthSemestr.CourseName}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
-                        row.seventhSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
-                            {row.seventhSemestr}
+                    <TableCell style={cellStyle}>{
+                        row.seventhSemestr.CourseID ?   
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            style={{ fontSize: '10px' }} 
+                            size="small"
+                            value={row.seventhSemestr.CourseID}
+                            onClick={this.openModal}
+                        >
+                            {row.seventhSemestr.CourseName}
                         </Button>
                         : ""
                     }
                     </TableCell>
-                    <TableCell style={{ padding: '6px 18px 6px 14px' }}>{
-                        row.eighthSemestr ?   
-                        <Button variant="contained" color="primary" style={{ fontSize: '10px' }} size="small">
-                            {row.eighthSemestr}
+                    <TableCell style={cellStyle}>{
+                        row.eighthSemestr.CourseID ?   
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            style={{ fontSize: '10px' }} 
+                            size="small"
+                            value={row.eighthSemestr.CourseID}
+                            onClick={this.openModal}
+                        >
+                            {row.eighthSemestr.CourseName}
                         </Button>
                         : ""
                     }
@@ -207,6 +329,8 @@ class CourseMap extends React.Component {
                 ))}
               </TableBody>
             </Table>
+            <DisciplineInfo isOpen={this.state.isOpenModal} selectedObjectId={this.state.selectedCourseId} 
+                            setModalVisibility={this.setModalVisibility} modalText={modalText}/>
           </div>)
     }
 }

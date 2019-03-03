@@ -22,9 +22,9 @@ namespace SystemOfCurricula.Services
                                where course.SpecialityID == specialityId
                                select new CourseInfoDTO()
                                {
-                                   SubjectID = subject.SubjectID,
+                                   CourseID = course.CourseID,
                                    Semestr = course.Semestr,
-                                   SubjectName = subject.SubjectName,
+                                   CourseName = subject.SubjectName,
                                    LecturerFirstName = lecturer.TeacherFirstName,
                                    LecturerLastName = lecturer.TeacherLastName,
                                    LecturerDegree = lecturer.Degree,
@@ -91,6 +91,39 @@ namespace SystemOfCurricula.Services
                                }).ToList();
 
                 return courses;
+            }
+        }
+
+        public static CourseInfoDTO LoadCourseInfo(int courseId)
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var courseInfo = (from subject in dbContext.Subject
+                            join course in dbContext.Course on subject.SubjectID equals course.SubjectID
+                            join lecturer in dbContext.Teacher on course.Lecturer equals lecturer.TeacherID
+                            join assistant in dbContext.Teacher on course.Assistant equals assistant.TeacherID
+                            where course.CourseID == courseId
+                               select new CourseInfoDTO()
+                    {
+                        CourseID = subject.SubjectID,
+                        Semestr = course.Semestr,
+                        CourseName = subject.SubjectName,
+                        LecturerFirstName = lecturer.TeacherFirstName,
+                        LecturerLastName = lecturer.TeacherLastName,
+                        LecturerDegree = lecturer.Degree,
+                        LecturerAcademicStatus = lecturer.AcademicStatus,
+                        LecturerDepartment = lecturer.Department,
+                        AssistantFirstName = assistant.TeacherFirstName,
+                        AssistantLastName = assistant.TeacherLastName,
+                        AssistantDegree = assistant.Degree,
+                        AssistantAcademicStatus = assistant.AcademicStatus,
+                        AssistantDepartment = assistant.Department,
+                        CourseCredit = course.CourseCredit,
+                        CourseWorkCredit = course.CourseWorkCredit,
+                        IsOnlyPractice = course.IsOnlyPractice
+                               }).ToList().First();
+
+                return courseInfo;
             }
         }
     }

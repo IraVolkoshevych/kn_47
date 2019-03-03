@@ -7,9 +7,9 @@ namespace SystemOfCurricula.Models.DTOs
 {
     public class CourseInfoDTO
     {
-        public int SubjectID { get; set; }
+        public int CourseID { get; set; }
         public int Semestr { get; set; }
-        public string SubjectName { get; set; }
+        public string CourseName { get; set; }
         public string LecturerFirstName { get; set; }
         public string LecturerLastName { get; set; }
         public string LecturerDegree { get; set; }
