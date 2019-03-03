@@ -54,7 +54,18 @@ namespace SystemOfCurricula.Controllers
         {
             var courseInfo = CurricilaService.LoadCourseInfo(courseId);
 
-            return Ok(courseInfo);
+            var startCourses = CurricilaService.LoadStartCourses(courseId);
+            var dependentCourses = CurricilaService.LoadDependentCourses(courseId);
+
+            var courseDependencies = startCourses.Concat(dependentCourses);
+
+            var courseInfoAndDependencies = new
+            {
+                CourseInfo = courseInfo,
+                CourseDependencies = courseDependencies
+            };
+
+            return Ok(courseInfoAndDependencies);
         }
     }
 }

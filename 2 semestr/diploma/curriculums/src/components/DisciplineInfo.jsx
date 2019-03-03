@@ -26,6 +26,17 @@ class DisciplineInfo extends React.Component {
 
 
   render() {
+    debugger;
+    let StartCourses = this.props.courseDependencies ? this.props.courseDependencies
+      .filter(dependency => dependency.IsStartCourse).map(dependency =>{
+        return dependency.SubjectName;
+    }) : [];
+
+    let DependentCourses = this.props.courseDependencies ? this.props.courseDependencies
+    .filter(dependency => !dependency.IsStartCourse).map(dependency =>{
+      return dependency.SubjectName;
+  }) : [];
+
     return (
       <div>
         <Dialog
@@ -34,17 +45,26 @@ class DisciplineInfo extends React.Component {
           open={this.props.isOpen}
         >
           <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-            Modal title
-            <IconButton aria-label="Close"  onClick={this.handleClose} style={{
-                marginLeft: '400px'
-            }}>
-                <CloseIcon />
-            </IconButton>
+            {this.props.courseName}
           </DialogTitle>
           <DialogContent>
             <Typography gutterBottom>
               {this.props.modalText}
             </Typography>
+              StartCourses<br/>
+              {
+                StartCourses.map(course =>
+                  <Button color="primary">
+                    { course }
+                  </Button>)
+              }
+              <br/>DependentCourses<br/>
+              {
+                DependentCourses.map(course =>
+                  <Button color="primary">
+                    { course }
+                  </Button>)
+              }
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose} color="primary">
