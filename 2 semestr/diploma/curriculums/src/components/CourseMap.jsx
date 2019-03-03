@@ -175,6 +175,16 @@ class CourseMap extends React.Component {
         }
     }
 
+    buildModalText(courseInfo){
+        return(
+            <div>
+                {courseInfo.CourseName + " " + courseInfo.CourseCredit + " кред. "}<br/>
+                {" Лектор - " + courseInfo.LecturerDegree + " " + courseInfo.LecturerAcademicStatus
+                + " каф. " + courseInfo.LecturerDepartment + " " + courseInfo.LecturerFirstName + " " + courseInfo.LecturerLastName}<br/>
+                {"Викладач практичних/лабораторних занять - "+ courseInfo.AssistantDegree + " " + courseInfo.AssistantAcademicStatus
+                + " каф. " + courseInfo.AssistantDepartment + " " + courseInfo.AssistantFirstName + " " + courseInfo.AssistantLastName}<br/>
+            </div>)
+    }
     render(){
         let cellStyle = {
             padding: '6px 18px 6px 14px'
@@ -183,9 +193,7 @@ class CourseMap extends React.Component {
         console.log(this.state.courses)
         let info = this.state.selectedCourseInfo;
 
-        let modalText = info ? info.CourseName+ " " + info.LecturerDegree + " " + info.LecturerAcademicStatus
-                        + " каф. " + info.LecturerDepartment + " " + info.LecturerFirstName + " " + info.LecturerLastName 
-                        : "";
+        let modalText = info ? this.buildModalText(info) : "";
                         
         return(
             <div className="coursemap col-10">
