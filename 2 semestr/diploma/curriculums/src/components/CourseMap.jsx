@@ -166,7 +166,6 @@ class CourseMap extends React.Component {
     buildModalText(courseInfo){
         return(
             <div>
-                {courseInfo.CourseCredit + " кред. "}<br/>
                 {" Лектор - " + courseInfo.LecturerDegree + " " + courseInfo.LecturerAcademicStatus
                 + " каф. " + courseInfo.LecturerDepartment + " " + courseInfo.LecturerFirstName + " " + courseInfo.LecturerLastName}<br/>
                 {"Викладач практичних/лабораторних занять - "+ courseInfo.AssistantDegree + " " + courseInfo.AssistantAcademicStatus
@@ -180,9 +179,6 @@ class CourseMap extends React.Component {
 
         console.log(this.state)
         let info = this.state.selectedCourseInfo;
-
-        let modalText = info ? this.buildModalText(info) : "";
-        let modalTitle = info ? info.CourseName : "";  
         let color = "primary";              
         return(
             <div className="coursemap col-10">
@@ -327,7 +323,7 @@ class CourseMap extends React.Component {
               </TableBody>
             </Table>
             <DisciplineInfo isOpen={this.state.isOpenModal} selectedObjectId={this.state.selectedCourseId} 
-                            setModalVisibility={this.setModalVisibility} courseName={modalTitle} modalText={modalText}
+                            setModalVisibility={this.setModalVisibility} courseInfo={info}
                             courseDependencies={this.state.courseDependencies}/>
           </div>)
     }

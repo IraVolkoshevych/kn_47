@@ -40,6 +40,13 @@ class DisciplineInfo extends React.Component {
 
     let leftPosition  = window.screen.width / 4;
 
+    let info = this.props.courseInfo;
+    let lectererInfo =  info ? info.LecturerDegree + " " + info.LecturerAcademicStatus
+        + " каф. " + info.LecturerDepartment + " " + info.LecturerFirstName + " " + info.LecturerLastName : "";
+    let assistantInfo = info ? info.AssistantDegree + " " + info.AssistantAcademicStatus
+        + " каф. " + info.AssistantDepartment + " " + info.AssistantFirstName + " " + info.AssistantLastName : "";
+    let courseName = info ? info.CourseName : "";
+    let courseCredit = info ? info.CourseCredit : "";
     return (
       <div>
         <Dialog
@@ -50,35 +57,46 @@ class DisciplineInfo extends React.Component {
           style={{width: 750, left: leftPosition}}
         >
           <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-            {this.props.courseName}
+            {courseName + " ("  + courseCredit + " кред.)"}
           </DialogTitle>
           <DialogContent>
             <Typography gutterBottom>
-              {this.props.modalText}
+              Лектор <br/>
+              <h5>{lectererInfo}</h5>
+              Викладач практичних/лабораторних занять<br/>
+              <h5>{assistantInfo}</h5>
             </Typography>
             <span className="d-flex justify-content-center">
             {
               StartCourses.map(course =>
-                <Button color="primary">
+                <Button color="primary" style={{textTransform: "none"}}>
                   { course }
                 </Button>)
             }
-            </span><br/>
-            <div className="d-flex justify-content-center">
-              <img src={arrow} alt="Arrow" height="42" width="42"/><br/>
-            </div>
+            </span>
+            {
+              StartCourses.length !== 0 ?
+                <div className="d-flex justify-content-center">
+                  <img src={arrow} alt="Arrow" /><br/>
+                </div>
+              : ""
+            }
             <Typography className="d-flex justify-content-center" gutterBottom>
-              <Button variant="contained" color="secondary">
-                {this.props.courseName}
+              <Button color="primary" style={{textTransform: "none"}}>
+                {courseName}
                 </Button>
-            </Typography><br/>
-            <div className="d-flex justify-content-center">
-              <img src={arrow} alt="Arrow" height="42" width="42"/><br/>
-            </div><br/>
+            </Typography>
+            {
+              DependentCourses.length !== 0 ?
+                <div className="d-flex justify-content-center">
+                <img src={arrow} alt="Arrow"/>
+                </div>
+              : ""
+            }
             <span className="d-flex justify-content-center">
             {
               DependentCourses.map(course =>
-                <Button color="primary">
+                <Button color="primary" style={{textTransform: "none"}}>
                   { course }
                 </Button>)
             }
