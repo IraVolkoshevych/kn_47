@@ -36,16 +36,18 @@ class DisciplineInfo extends React.Component {
     let DependentCourses = this.props.courseDependencies ? this.props.courseDependencies
     .filter(dependency => !dependency.IsStartCourse).map(dependency =>{
       return dependency.SubjectName;
-  }) : [];
+    }) : [];
+
+    let leftPosition  = window.screen.width / 4;
 
     return (
       <div>
         <Dialog
           onClose={this.handleClose}
-          aria-labelledby="customized-dialog-title"
+          aria-labelledby="alert-dialog-title" 
           open={this.props.isOpen}
           maxWidth="false"
-          style={{width: 750}}
+          style={{width: 750, left: leftPosition}}
         >
           <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
             {this.props.courseName}
