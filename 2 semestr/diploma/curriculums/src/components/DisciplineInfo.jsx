@@ -56,15 +56,15 @@ class DisciplineInfo extends React.Component {
           maxWidth="false"
           style={{width: 750, left: leftPosition}}
         >
-          <DialogTitle id="customized-dialog-title" onClose={this.handleClose}>
-            {courseName + " ("  + courseCredit + " кред.)"}
+          <DialogTitle id="customized-dialog-title" onClose={this.handleClose} style={{color: "brown"}}>
+          <strong>{courseName + " ("  + courseCredit + " кред.)"}</strong>
           </DialogTitle>
           <DialogContent>
-            <Typography gutterBottom>
-              Лектор <br/>
-              <h5>{lectererInfo}</h5>
-              Викладач практичних/лабораторних занять<br/>
-              <h5>{assistantInfo}</h5>
+            <Typography className="mb-3" gutterBottom>
+              <h8>Лектор</h8> <br/>
+              <h6><b>{lectererInfo}</b></h6>
+              <h8>Викладач практичних/лабораторних занять</h8><br/>
+              <h6><b>{assistantInfo}</b></h6>
             </Typography>
             <span className="d-flex justify-content-center">
             {
@@ -77,7 +77,7 @@ class DisciplineInfo extends React.Component {
             {
               StartCourses.length !== 0 ?
                 <div className="d-flex justify-content-center">
-                  <img src={arrow} alt="Arrow" /><br/>
+                  <img src={arrow} alt="Arrow" weight="18" height="18"/><br/>
                 </div>
               : ""
             }
@@ -89,7 +89,7 @@ class DisciplineInfo extends React.Component {
             {
               DependentCourses.length !== 0 ?
                 <div className="d-flex justify-content-center">
-                <img src={arrow} alt="Arrow"/>
+                <img src={arrow} alt="Arrow"weight="18" height="18"/>
                 </div>
               : ""
             }
