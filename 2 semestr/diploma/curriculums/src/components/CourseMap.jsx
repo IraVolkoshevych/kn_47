@@ -43,6 +43,7 @@ class CourseMap extends React.Component {
 
     loadData(){
         let specialityId = this.props.match.params.specialityId;
+        
         axios.get("http://localhost:61735/api/GetCoursesInfoList/" + specialityId)
         .then((response) =>{
           console.log(response);

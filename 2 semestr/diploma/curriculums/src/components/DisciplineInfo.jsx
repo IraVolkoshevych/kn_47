@@ -47,6 +47,7 @@ class DisciplineInfo extends React.Component {
         + " каф. " + info.AssistantDepartment + " " + info.AssistantFirstName + " " + info.AssistantLastName : "";
     let courseName = info ? info.CourseName : "";
     let courseCredit = info ? info.CourseCredit : "";
+    let semestr = info ? info.Semestr : "";
     return (
       <div>
         <Dialog
@@ -57,7 +58,7 @@ class DisciplineInfo extends React.Component {
           style={{width: 750, left: leftPosition}}
         >
           <DialogTitle id="customized-dialog-title" onClose={this.handleClose} style={{color: "brown"}}>
-          <strong>{courseName + " ("  + courseCredit + " кред.)"}</strong>
+          <strong>{ courseName + ", "  + semestr + " семестр" + " ("  + courseCredit + " кред.)" }</strong>
           </DialogTitle>
           <DialogContent>
             <Typography className="mb-3" gutterBottom>
