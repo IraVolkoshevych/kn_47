@@ -58,6 +58,7 @@ namespace SystemOfCurricula.Services
                                where dependentCourse.CourseID == courseId
                                select new CourseDependentDTO()
                                {
+                                   CourseId = startCourse.CourseID,
                                    SubjectName = startSubject.SubjectName,
                                    SubjectType = startSubject.SubjectType,
                                    Semestr = startCourse.Semestr,
@@ -83,6 +84,7 @@ namespace SystemOfCurricula.Services
                                where startCourse.CourseID == courseId
                                select new CourseDependentDTO()
                                {
+                                   CourseId = dependentCourse.CourseID,
                                    SubjectName = dependentSubject.SubjectName,
                                    SubjectType = dependentSubject.SubjectType,
                                    Semestr = dependentCourse.Semestr,

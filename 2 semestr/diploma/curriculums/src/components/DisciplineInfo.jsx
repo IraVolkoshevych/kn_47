@@ -19,24 +19,24 @@ class DisciplineInfo extends React.Component {
       super(props);
   
       this.handleClose = this.handleClose.bind(this);
+      this.openAnotherCourse = this.openAnotherCourse.bind(this);
   }
 
   handleClose = () => {
     this.props.setModalVisibility(false);
   };
 
+  openAnotherCourse = (event) =>{
+    this.props.updateModalContent(event.currentTarget.value);
+  }
 
   render() {
     debugger;
     let StartCourses = this.props.courseDependencies ? this.props.courseDependencies
-      .filter(dependency => dependency.IsStartCourse).map(dependency =>{
-        return dependency.SubjectName;
-    }) : [];
+      .filter(dependency => dependency.IsStartCourse) : [];
 
     let DependentCourses = this.props.courseDependencies ? this.props.courseDependencies
-    .filter(dependency => !dependency.IsStartCourse).map(dependency =>{
-      return dependency.SubjectName;
-    }) : [];
+    .filter(dependency => !dependency.IsStartCourse) : [];
 
     let leftPosition  = window.screen.width / 4;
 
@@ -69,8 +69,8 @@ class DisciplineInfo extends React.Component {
             <span className="d-flex justify-content-center">
             {
               StartCourses.map(course =>
-                <Button color="primary" style={{textTransform: "none"}}>
-                  { course }
+                <Button color="primary" style={{textTransform: "none"}} onClick={this.openAnotherCourse} value={course.CourseId}>
+                  { course.SubjectName }
                 </Button>)
             }
             </span>
@@ -96,8 +96,8 @@ class DisciplineInfo extends React.Component {
             <span className="d-flex justify-content-center">
             {
               DependentCourses.map(course =>
-                <Button color="primary" style={{textTransform: "none"}}>
-                  { course }
+                <Button color="primary" style={{textTransform: "none"}} onClick={this.openAnotherCourse} value={course.CourseId}>
+                  { course.SubjectName }
                 </Button>)
             }
             </span>

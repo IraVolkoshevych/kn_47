@@ -29,6 +29,7 @@ class CourseMap extends React.Component {
         this.openModal = this.openModal.bind(this);
         this.setModalVisibility = this.setModalVisibility.bind(this);
         this.loadCourseInfo = this.loadCourseInfo.bind(this);
+        this.loadModalData = this.loadModalData.bind(this);
     }
 
     loadCourseInfo(courseId){
@@ -53,13 +54,17 @@ class CourseMap extends React.Component {
     }
 
     openModal(event){
-        axios.get("http://localhost:61735/api/GetCourseInfo/" + event.currentTarget.value)
+        this.loadModalData(event.currentTarget.value);
+    }
+
+    loadModalData(courseId){
+        axios.get("http://localhost:61735/api/GetCourseInfo/" + courseId)
             .then((response) =>{
                 this.setState({
                     selectedCourseInfo : response.data.CourseInfo,
                     courseDependencies : response.data.CourseDependencies,
                     isOpenModal : true,
-                    selectedCourseId : event.currentTarget.value
+                    selectedCourseId : courseId
                 });
             });
     }
@@ -324,7 +329,7 @@ class CourseMap extends React.Component {
             </Table>
             <DisciplineInfo isOpen={this.state.isOpenModal} selectedObjectId={this.state.selectedCourseId} 
                             setModalVisibility={this.setModalVisibility} courseInfo={info}
-                            courseDependencies={this.state.courseDependencies}/>
+                            courseDependencies={this.state.courseDependencies} updateModalContent={this.loadModalData}/>
           </div>)
     }
 }

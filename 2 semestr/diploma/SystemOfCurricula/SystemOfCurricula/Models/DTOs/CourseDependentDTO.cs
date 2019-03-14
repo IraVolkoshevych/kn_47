@@ -7,6 +7,7 @@ namespace SystemOfCurricula.Models.DTOs
 {
     public class CourseDependentDTO
     {
+        public int CourseId { get; set; }
         public int Semestr { get; set; }
         public string SubjectName { get; set; }
         public string SubjectType { get; set; }
