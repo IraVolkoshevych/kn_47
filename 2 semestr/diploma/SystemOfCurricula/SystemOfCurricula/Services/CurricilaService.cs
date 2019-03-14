@@ -128,5 +128,29 @@ namespace SystemOfCurricula.Services
                 return courseInfo;
             }
         }
+
+        public static List<SpecialityDTO> LoadSpecialities()
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var specialities = dbContext.Speciality.Select(s => new SpecialityDTO
+                {
+                    SpecialityId = s.SpecialityID,
+                    SpecialityName = s.SpecialityName
+                }).ToList();
+
+                return specialities;
+            }
+        }
     }
+
+    #region  helper Classes
+
+    public class SpecialityDTO
+    {
+        public int SpecialityId { get; set; }
+        public string SpecialityName { get; set; }
+    }
+
+    #endregion
 }

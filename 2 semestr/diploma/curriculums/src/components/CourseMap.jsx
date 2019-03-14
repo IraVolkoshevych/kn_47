@@ -12,8 +12,8 @@ import DisciplineInfo from './DisciplineInfo';
 import "./CourseMap.css"
 
 class CourseMap extends React.Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state ={
             courses : [],
             rows : [],
@@ -42,7 +42,8 @@ class CourseMap extends React.Component {
     }
 
     loadData(){
-        axios.get("http://localhost:61735/api/GetCoursesInfoList/2")
+        let specialityId = this.props.match.params.specialityId;
+        axios.get("http://localhost:61735/api/GetCoursesInfoList/" + specialityId)
         .then((response) =>{
           console.log(response);
           this.setState({

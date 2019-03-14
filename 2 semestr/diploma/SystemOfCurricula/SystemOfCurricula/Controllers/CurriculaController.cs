@@ -67,5 +67,14 @@ namespace SystemOfCurricula.Controllers
 
             return Ok(courseInfoAndDependencies);
         }
+
+        [Route("api/GetSpecialities")]
+        [HttpGet]
+        public IHttpActionResult LoadSpecialities()
+        {
+            var specialities = CurricilaService.LoadSpecialities();
+
+            return Ok(specialities);
+        }
     }
 }
