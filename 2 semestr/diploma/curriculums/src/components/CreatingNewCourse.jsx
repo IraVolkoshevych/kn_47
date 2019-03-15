@@ -17,7 +17,8 @@ class CreateCourse extends React.Component {
       super(props);
   
       this.state = {
-        subjects : []
+        subjects : [],
+        subjectName: ""
       }
 
       this.loadSubjects();
@@ -28,6 +29,10 @@ class CreateCourse extends React.Component {
 
   handleClose = () => {
     this.props.setModalVisibility(false, "isOpenCreatingModal");
+  };
+
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   loadSubjects(specialityId){
@@ -54,10 +59,10 @@ class CreateCourse extends React.Component {
           </DialogTitle>
           <DialogContent>
             <Select
-              value={this.state.age}
+              value={this.state.subjectName}
               onChange={this.handleChange}
               inputProps={{
-                name: 'age',
+                name: 'subjectName',
                 id: 'age-simple',
               }}
             >
@@ -66,7 +71,7 @@ class CreateCourse extends React.Component {
               </MenuItem>
               {
                 this.state.subjects.map(subject => {
-                  return <MenuItem value={subject.SubjectID}>{subject.SubjectName}</MenuItem>
+                  return <MenuItem value={subject.SubjectId}>{subject.SubjectName}</MenuItem>
                 })
               }
             </Select>
