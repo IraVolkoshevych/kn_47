@@ -11,6 +11,7 @@ import green from '@material-ui/core/colors/green';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import DisciplineInfo from './DisciplineInfo';
+import CreateCourse from './CreatingNewCourse';
 import "./CourseMap.css"
 
 class CourseMap extends React.Component {
@@ -20,9 +21,10 @@ class CourseMap extends React.Component {
             courses : [],
             rows : [],
             selectedCourseId : 0,
-            isOpenModal: false,
+            isOpenInfoModal: false,
             selectedCourseInfo : null,
-            courseDependencies : null
+            courseDependencies : null,
+            isOpenCreatingModal: false
         }
 
         this.loadData();
@@ -33,6 +35,7 @@ class CourseMap extends React.Component {
         this.loadCourseInfo = this.loadCourseInfo.bind(this);
         this.loadModalData = this.loadModalData.bind(this);
         this.chooseColorForCourse = this.chooseColorForCourse.bind(this);
+        this.handleOpenCreatingModal = this.handleOpenCreatingModal.bind(this);
     }
 
     loadCourseInfo(courseId){
@@ -62,21 +65,27 @@ class CourseMap extends React.Component {
         this.loadModalData(event.currentTarget.value);
     }
 
+    handleOpenCreatingModal(){
+        this.setState({
+            isOpenCreatingModal: true
+        })
+    }
+
     loadModalData(courseId){
         axios.get("http://localhost:61735/api/GetCourseInfo/" + courseId)
             .then((response) =>{
                 this.setState({
                     selectedCourseInfo : response.data.CourseInfo,
                     courseDependencies : response.data.CourseDependencies,
-                    isOpenModal : true,
+                    isOpenInfoModal : true,
                     selectedCourseId : courseId
                 });
             });
     }
 
-    setModalVisibility(isOpen){
+    setModalVisibility(isOpen, modalName){
         this.setState({
-            isOpenModal : isOpen
+            [modalName] : isOpen
         });
     }
 
@@ -245,7 +254,7 @@ class CourseMap extends React.Component {
                   <TableCell>VIII семестр</TableCell>
                   <TableCell>
                     <Fab className="ml-3" size="small" color="primary" aria-label="Add" >
-                        <AddIcon onClick={this.handleOpen}/>
+                        <AddIcon onClick={this.handleOpenCreatingModal}/>
                     </Fab>
                   </TableCell>
                 </TableRow>
@@ -395,9 +404,11 @@ class CourseMap extends React.Component {
                 })       
             }
             </span>
-            <DisciplineInfo isOpen={this.state.isOpenModal} selectedObjectId={this.state.selectedCourseId} 
+            <DisciplineInfo isOpen={this.state.isOpenInfoModal} selectedObjectId={this.state.selectedCourseId} 
                             setModalVisibility={this.setModalVisibility} courseInfo={info}
                             courseDependencies={this.state.courseDependencies} updateModalContent={this.loadModalData}/>
+            <CreateCourse isOpen={this.state.isOpenCreatingModal} setModalVisibility={this.setModalVisibility} 
+                          specialityId={this.props.match.params.specialityId}/>
           </div>
           </span>)
     }

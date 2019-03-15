@@ -143,6 +143,29 @@ namespace SystemOfCurricula.Services
             }
         }
 
+        public static List<SubjectDTO> LoadSubjects(int specialityId)
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var existantSubjects = (from subject in dbContext.Subject
+                    join course in dbContext.Course on subject.SubjectID equals course.SubjectID
+                    where course.SpecialityID == specialityId
+                    select new SubjectDTO()
+                    {
+                        SubjectId = subject.SubjectID,
+                        SubjectName = subject.SubjectName
+                    }).Select(s => s.SubjectId).ToList();
+
+                var subjects = dbContext.Subject.Where(s => !existantSubjects.Contains(s.SubjectID)).Select(s => new SubjectDTO()
+                {
+                    SubjectId = s.SubjectID,
+                    SubjectName = s.SubjectName
+                }).ToList();
+
+                return subjects;
+            }
+        }
+
         public static void SaveSpeciality(SpecialityDTO speciality)
         {
             using (var dbContext = new SystemOfCurriculaContext())
@@ -157,6 +180,29 @@ namespace SystemOfCurricula.Services
                 dbContext.SaveChanges();
             }
         }
+
+        public static string SaveCourse(Course courseInfo)
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var creditSum = dbContext.Course.Where(course => 
+                        course.Semestr == courseInfo.Semestr && course.SpecialityID == courseInfo.SpecialityID)
+                        .Select(c => c.TotalCredit).Sum();
+
+                var probablyCreditSum = creditSum + courseInfo.TotalCredit;
+
+                if (probablyCreditSum < 30)
+                {
+                    dbContext.Course.Add(courseInfo);
+                    dbContext.SaveChanges();
+                    return "";
+                }
+                else
+                {
+                    return "Сума кредитів семестру не має перевищувати 30.";
+                }
+            }
+        }
     }
 
     #region  helper Classes
@@ -166,6 +212,12 @@ namespace SystemOfCurricula.Services
         public int SpecialityId { get; set; }
         public string SpecialityName { get; set; }
         public int StartYear { get; set; }
+    }
+
+    public class SubjectDTO
+    {
+        public int SubjectId { get; set; }
+        public string SubjectName { get; set; }
     }
 
     #endregion

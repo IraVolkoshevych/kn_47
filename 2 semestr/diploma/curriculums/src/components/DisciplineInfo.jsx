@@ -20,7 +20,7 @@ class DisciplineInfo extends React.Component {
   }
 
   handleClose = () => {
-    this.props.setModalVisibility(false);
+    this.props.setModalVisibility(false, "isOpenInfoModal");
   };
 
   openAnotherCourse = (event) =>{

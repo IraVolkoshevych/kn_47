@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using SystemOfCurricula.Services;
 using System.Web.Http.Cors;
+using SystemOfCurricula.Models.DTOs;
+using SystemOfCurricula.Models;
 
 namespace SystemOfCurricula.Controllers
 {
@@ -78,6 +80,16 @@ namespace SystemOfCurricula.Controllers
             return Ok(specialities);
         }
 
+        [Route("api/GetSubjects/{specialityId}")]
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public IHttpActionResult LoadSubjects(int specialityId)
+        {
+            var subjects = CurricilaService.LoadSubjects(specialityId);
+
+            return Ok(subjects);
+        }
+
         #endregion
 
         #region Creating
@@ -88,6 +100,15 @@ namespace SystemOfCurricula.Controllers
         public IHttpActionResult SaveSpeciality(SpecialityDTO model)
         {
             CurricilaService.SaveSpeciality(model);
+            return Ok();
+        }
+
+        [Route("api/SaveCourse")]
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public IHttpActionResult SaveCourse(Course model)
+        {
+            CurricilaService.SaveCourse(model);
             return Ok();
         }
 
