@@ -5,16 +5,16 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using SystemOfCurricula.Services;
+using System.Web.Http.Cors;
 
 namespace SystemOfCurricula.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CurriculaController : ApiController
     {
-        /// <summary>
-        /// Gets full information about courses by speciality in database
-        /// </summary>
-        /// <returns>List of instances of the class CourseInfo</returns>
-        /// <example>http://localhost:*****/api/CoursesInfoList/</example>
+
+        #region Get courses info
+
         [Route("api/GetCoursesInfoList/{specialityId}")]
         [HttpGet]
         public IHttpActionResult GetCoursesInfoList(int specialityId)
@@ -70,11 +70,28 @@ namespace SystemOfCurricula.Controllers
 
         [Route("api/GetSpecialities")]
         [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
         public IHttpActionResult LoadSpecialities()
         {
             var specialities = CurricilaService.LoadSpecialities();
 
             return Ok(specialities);
         }
+
+        #endregion
+
+        #region Creating
+
+        [Route("api/SaveSpeciality")]
+        [HttpPost]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public IHttpActionResult SaveSpeciality(SpecialityDTO model)
+        {
+            CurricilaService.SaveSpeciality(model);
+            return Ok();
+        }
+
+        #endregion
+
     }
 }

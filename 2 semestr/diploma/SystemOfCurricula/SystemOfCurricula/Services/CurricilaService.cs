@@ -9,7 +9,6 @@ namespace SystemOfCurricula.Services
 {
     public static class CurricilaService
     {
-
         //Update this one, need to remomove redundant properties from CourseInfoDTO
         public static IList<CourseInfoDTO> LoadCoursesInfoForPlan(int specialityId)
         {
@@ -143,6 +142,21 @@ namespace SystemOfCurricula.Services
                 return specialities;
             }
         }
+
+        public static void SaveSpeciality(SpecialityDTO speciality)
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var newSpeciality = new Speciality()
+                {
+                    SpecialityName = speciality.SpecialityName,
+                    StartYear = new DateTime(speciality.StartYear, 1, 1)
+            };
+
+                dbContext.Speciality.Add(newSpeciality);
+                dbContext.SaveChanges();
+            }
+        }
     }
 
     #region  helper Classes
@@ -151,6 +165,7 @@ namespace SystemOfCurricula.Services
     {
         public int SpecialityId { get; set; }
         public string SpecialityName { get; set; }
+        public int StartYear { get; set; }
     }
 
     #endregion

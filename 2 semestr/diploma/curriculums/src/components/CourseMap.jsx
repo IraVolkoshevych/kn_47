@@ -8,6 +8,8 @@ import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
 import DisciplineInfo from './DisciplineInfo';
 import "./CourseMap.css"
 
@@ -228,6 +230,7 @@ class CourseMap extends React.Component {
                 name: "інші"
             }];        
         return(
+            <span>
             <div className="coursemap col-10">
             <Table className="mb-3">
               <TableHead>
@@ -240,6 +243,11 @@ class CourseMap extends React.Component {
                   <TableCell>VI семестр</TableCell>
                   <TableCell>VII семестр</TableCell>
                   <TableCell>VIII семестр</TableCell>
+                  <TableCell>
+                    <Fab className="ml-3" size="small" color="primary" aria-label="Add" >
+                        <AddIcon onClick={this.handleOpen}/>
+                    </Fab>
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -365,6 +373,7 @@ class CourseMap extends React.Component {
                         : ""
                     }
                     </TableCell>
+                    <TableCell />
                   </TableRow>
                 ))}
               </TableBody>
@@ -389,7 +398,8 @@ class CourseMap extends React.Component {
             <DisciplineInfo isOpen={this.state.isOpenModal} selectedObjectId={this.state.selectedCourseId} 
                             setModalVisibility={this.setModalVisibility} courseInfo={info}
                             courseDependencies={this.state.courseDependencies} updateModalContent={this.loadModalData}/>
-          </div>)
+          </div>
+          </span>)
     }
 }
 

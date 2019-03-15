@@ -50,3 +50,6 @@ C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\diploma\SystemOfCurricula\Sys
 C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\diploma\SystemOfCurricula\SystemOfCurricula\obj\Debug\SystemOfCurricula.csproj.CoreCompileInputs.cache
 C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\diploma\SystemOfCurricula\SystemOfCurricula\obj\Debug\SystemOfCurricula.dll
 C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\diploma\SystemOfCurricula\SystemOfCurricula\obj\Debug\SystemOfCurricula.pdb
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\diploma\SystemOfCurricula\SystemOfCurricula\bin\System.Web.Cors.dll
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\diploma\SystemOfCurricula\SystemOfCurricula\bin\System.Web.Http.Cors.dll
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\diploma\SystemOfCurricula\SystemOfCurricula\bin\System.Web.Http.Cors.xml
