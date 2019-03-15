@@ -147,7 +147,7 @@ class CourseMap extends React.Component {
             thirdSemestr : {
                 CourseID : thirdSemestr[rowId] ? thirdSemestr[rowId].CourseID : undefined,
                 CourseName : thirdSemestr[rowId] ? thirdSemestr[rowId].CourseName : "",
-                CourseType : firstSemestr[rowId] ? thirdSemestr[rowId].CourseType : ""
+                CourseType : thirdSemestr[rowId] ? thirdSemestr[rowId].CourseType : ""
             },
             fourthSemestr : {
                 CourseID : fourthSemestr[rowId] ? fourthSemestr[rowId].CourseID : undefined,
@@ -191,8 +191,8 @@ class CourseMap extends React.Component {
         switch(type){
             case "humanitarian": return "red";
             case "normative": return "green";
-            case "professional": return "blue";
-            case "specialization": return "yelow";
+            case "professional": return "#30BBF6";
+            case "specialization": return "#ABFF00";
             case "other": return "#FF3f9f";
         }
     }
@@ -205,10 +205,31 @@ class CourseMap extends React.Component {
         console.log(this.state)
         let info = this.state.selectedCourseInfo;
         let color = "primary"; 
-        let backgroundColor = "red";             
+        let backgroundColor = "red";  
+        let courseTypes = [
+            {
+                type : "humanitarian",
+                name : "гуманітарні"
+            }, 
+            {
+                type: "normative",
+                name: "нормативні"
+            }, 
+            {
+                type: "professional",
+                name: "професійні"
+            }, 
+            {
+                type: "specialization",
+                name: "спеціалізації"
+            }, 
+            {
+                type: "other",
+                name: "інші"
+            }];        
         return(
             <div className="coursemap col-10">
-            <Table>
+            <Table className="mb-3">
               <TableHead>
                 <TableRow>
                   <TableCell>I семестр</TableCell>
@@ -348,6 +369,23 @@ class CourseMap extends React.Component {
                 ))}
               </TableBody>
             </Table>
+            <span>
+            {
+                courseTypes.map(courseType => {
+                    return (<span >
+                        <Button 
+                        className="mb-2 mr-2"
+                            variant="contained" 
+                            color={color}
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(courseType.type) }} 
+                            size="small"
+                        >
+                            {courseType.name}
+                        </Button>
+                    </span>)
+                })       
+            }
+            </span>
             <DisciplineInfo isOpen={this.state.isOpenModal} selectedObjectId={this.state.selectedCourseId} 
                             setModalVisibility={this.setModalVisibility} courseInfo={info}
                             courseDependencies={this.state.courseDependencies} updateModalContent={this.loadModalData}/>

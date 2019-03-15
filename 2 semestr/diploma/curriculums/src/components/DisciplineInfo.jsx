@@ -82,11 +82,15 @@ class DisciplineInfo extends React.Component {
                 </div>
               : ""
             }
-            <Typography className="d-flex justify-content-center" gutterBottom>
-              <Button color="primary" style={{textTransform: "none"}}>
-                {courseName}
-                </Button>
-            </Typography>
+            {
+              StartCourses.length !== 0 || DependentCourses.length !== 0 ?
+              <Typography className="d-flex justify-content-center" gutterBottom>
+                <Button color="primary" style={{textTransform: "none"}}>
+                  {courseName}
+                  </Button>
+              </Typography>
+              : ""
+            }
             {
               DependentCourses.length !== 0 ?
                 <div className="d-flex justify-content-center">
@@ -102,7 +106,8 @@ class DisciplineInfo extends React.Component {
                 </Button>)
             }
             </span>
-          </DialogContent>        </Dialog>
+          </DialogContent>
+          </Dialog>
       </div>
     );
   }
