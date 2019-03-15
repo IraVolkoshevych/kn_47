@@ -37,7 +37,8 @@ namespace SystemOfCurricula.Services
                                    AssistantDepartment = assistant.Department,
                                    CourseCredit = course.CourseCredit,
                                    CourseWorkCredit = course.CourseWorkCredit,
-                                   IsOnlyPractice = course.IsOnlyPractice
+                                   IsOnlyPractice = course.IsOnlyPractice,
+                                   CourseType = subject.SubjectType
                                }).ToList();
 
                 return courses;

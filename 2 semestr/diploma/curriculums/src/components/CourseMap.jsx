@@ -30,6 +30,7 @@ class CourseMap extends React.Component {
         this.setModalVisibility = this.setModalVisibility.bind(this);
         this.loadCourseInfo = this.loadCourseInfo.bind(this);
         this.loadModalData = this.loadModalData.bind(this);
+        this.chooseColorForCourse = this.chooseColorForCourse.bind(this);
     }
 
     loadCourseInfo(courseId){
@@ -43,7 +44,7 @@ class CourseMap extends React.Component {
 
     loadData(){
         let specialityId = this.props.match.params.specialityId;
-        
+
         axios.get("http://localhost:61735/api/GetCoursesInfoList/" + specialityId)
         .then((response) =>{
           console.log(response);
@@ -125,8 +126,6 @@ class CourseMap extends React.Component {
             tableRows[i]  = this.createRow(i, firstSemestr, secondSemestr, thirdSemestr, fourthSemestr, fifthSemestr, sixthSemestr, seventhSemestr, eighthSemestr)
         }
 
-        console.log(tableRows);
-
         this.setState({
             rows: tableRows
         })   
@@ -138,34 +137,42 @@ class CourseMap extends React.Component {
             firstSemestr : {
                 CourseID : firstSemestr[rowId] ? firstSemestr[rowId].CourseID : undefined,
                 CourseName : firstSemestr[rowId] ? firstSemestr[rowId].CourseName : "",
+                CourseType : firstSemestr[rowId] ? firstSemestr[rowId].CourseType : ""
             },
             secondSemestr : {
                 CourseID : secondSemestr[rowId] ? secondSemestr[rowId].CourseID : undefined,
-                CourseName : secondSemestr[rowId] ? secondSemestr[rowId].CourseName : ""
+                CourseName : secondSemestr[rowId] ? secondSemestr[rowId].CourseName : "",
+                CourseType : secondSemestr[rowId] ? secondSemestr[rowId].CourseType : ""
             },
             thirdSemestr : {
                 CourseID : thirdSemestr[rowId] ? thirdSemestr[rowId].CourseID : undefined,
-                CourseName : thirdSemestr[rowId] ? thirdSemestr[rowId].CourseName : ""
+                CourseName : thirdSemestr[rowId] ? thirdSemestr[rowId].CourseName : "",
+                CourseType : firstSemestr[rowId] ? thirdSemestr[rowId].CourseType : ""
             },
             fourthSemestr : {
                 CourseID : fourthSemestr[rowId] ? fourthSemestr[rowId].CourseID : undefined,
-                CourseName : fourthSemestr[rowId] ? fourthSemestr[rowId].CourseName : ""
+                CourseName : fourthSemestr[rowId] ? fourthSemestr[rowId].CourseName : "",
+                CourseType : fourthSemestr[rowId] ? fourthSemestr[rowId].CourseType : ""
             },
             fifthSemestr : {
                 CourseID : fifthSemestr[rowId] ? fifthSemestr[rowId].CourseID : undefined,
-                CourseName : fifthSemestr[rowId] ? fifthSemestr[rowId].CourseName : ""
+                CourseName : fifthSemestr[rowId] ? fifthSemestr[rowId].CourseName : "",
+                CourseType : fifthSemestr[rowId] ? fifthSemestr[rowId].CourseType : ""
             },
             sixthSemestr : {
                 CourseID : sixthSemestr[rowId] ? sixthSemestr[rowId].CourseID : undefined,
-                CourseName : sixthSemestr[rowId] ? sixthSemestr[rowId].CourseName : ""
+                CourseName : sixthSemestr[rowId] ? sixthSemestr[rowId].CourseName : "",
+                CourseType : sixthSemestr[rowId] ? sixthSemestr[rowId].CourseType : ""
             },
             seventhSemestr : {
                 CourseID : seventhSemestr[rowId] ? seventhSemestr[rowId].CourseID : undefined,
-                CourseName : seventhSemestr[rowId] ? seventhSemestr[rowId].CourseName : ""
+                CourseName : seventhSemestr[rowId] ? seventhSemestr[rowId].CourseName : "",
+                CourseType : seventhSemestr[rowId] ? seventhSemestr[rowId].CourseType : ""
             },
             eighthSemestr : {
                 CourseID : eighthSemestr[rowId] ? eighthSemestr[rowId].CourseID : undefined,
-                CourseName : eighthSemestr[rowId] ? eighthSemestr[rowId].CourseName : ""
+                CourseName : eighthSemestr[rowId] ? eighthSemestr[rowId].CourseName : "",
+                CourseType : eighthSemestr[rowId] ? eighthSemestr[rowId].CourseType : ""
             }
         }
     }
@@ -179,6 +186,17 @@ class CourseMap extends React.Component {
                 + " каф. " + courseInfo.AssistantDepartment + " " + courseInfo.AssistantFirstName + " " + courseInfo.AssistantLastName}<br/>
             </div>)
     }
+
+    chooseColorForCourse(type){
+        switch(type){
+            case "humanitarian": return "red";
+            case "normative": return "green";
+            case "professional": return "blue";
+            case "specialization": return "yelow";
+            case "other": return "#FF3f9f";
+        }
+    }
+
     render(){
         let cellStyle = {
             padding: '6px 18px 6px 14px'
@@ -186,7 +204,8 @@ class CourseMap extends React.Component {
 
         console.log(this.state)
         let info = this.state.selectedCourseInfo;
-        let color = "primary";              
+        let color = "primary"; 
+        let backgroundColor = "red";             
         return(
             <div className="coursemap col-10">
             <Table>
@@ -210,7 +229,7 @@ class CourseMap extends React.Component {
                         <Button 
                             variant="contained" 
                             color={color} 
-                            style={{ fontSize: '10px' }} 
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(row.firstSemestr.CourseType) }} 
                             size="small"
                             value={row.firstSemestr.CourseID}
                             onClick={this.openModal}
@@ -225,7 +244,7 @@ class CourseMap extends React.Component {
                         <Button 
                             variant="contained" 
                             color={color} 
-                            style={{ fontSize: '10px' }} 
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(row.secondSemestr.CourseType) }} 
                             size="small"
                             value={row.secondSemestr.CourseID}
                             onClick={this.openModal}
@@ -240,7 +259,7 @@ class CourseMap extends React.Component {
                         <Button 
                             variant="contained" 
                             color={color} 
-                            style={{ fontSize: '10px' }} 
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(row.thirdSemestr.CourseType) }} 
                             size="small"
                             value={row.thirdSemestr.CourseID}
                             onClick={this.openModal}
@@ -255,7 +274,7 @@ class CourseMap extends React.Component {
                         <Button 
                             variant="contained" 
                             color={color} 
-                            style={{ fontSize: '10px' }} 
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(row.fourthSemestr.CourseType) }} 
                             size="small"
                             value={row.fourthSemestr.CourseID}
                             onClick={this.openModal}
@@ -270,7 +289,7 @@ class CourseMap extends React.Component {
                         <Button 
                             variant="contained" 
                             color={color}  
-                            style={{ fontSize: '10px' }} 
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(row.fifthSemestr.CourseType) }} 
                             size="small"
                             value={row.fifthSemestr.CourseID}
                             onClick={this.openModal}
@@ -285,7 +304,7 @@ class CourseMap extends React.Component {
                         <Button 
                             variant="contained" 
                             color={color}
-                            style={{ fontSize: '10px' }} 
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(row.sixthSemestr.CourseType) }} 
                             size="small"
                             value={row.sixthSemestr.CourseID}
                             onClick={this.openModal}
@@ -300,7 +319,7 @@ class CourseMap extends React.Component {
                         <Button 
                             variant="contained" 
                             color={color}
-                            style={{ fontSize: '10px' }} 
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(row.seventhSemestr.CourseType) }} 
                             size="small"
                             value={row.seventhSemestr.CourseID}
                             onClick={this.openModal}
@@ -315,7 +334,7 @@ class CourseMap extends React.Component {
                         <Button 
                             variant="contained" 
                             color={color}
-                            style={{ fontSize: '10px' }} 
+                            style={{ fontSize: '10px', backgroundColor: this.chooseColorForCourse(row.eighthSemestr.CourseType) }} 
                             size="small"
                             value={row.eighthSemestr.CourseID}
                             onClick={this.openModal}

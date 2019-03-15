@@ -23,5 +23,6 @@ namespace SystemOfCurricula.Models.DTOs
         public double CourseCredit { get; set; }
         public double CourseWorkCredit { get; set; }
         public bool IsOnlyPractice { get; set; }
+        public string CourseType { get; set; }
     }
 }

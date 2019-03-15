@@ -39,8 +39,8 @@ class SpecialitiesPage extends React.Component {
         debugger;
         let color = "primary";              
         return(
-            <div >
-            <span className="d-flex justify-content-center">
+            <div>
+            <span className="mb-3 d-flex justify-content-center">
                 <h2>Система опису навчальних планів</h2><br/>
             </span>
             <span className="d-flex justify-content-center">
