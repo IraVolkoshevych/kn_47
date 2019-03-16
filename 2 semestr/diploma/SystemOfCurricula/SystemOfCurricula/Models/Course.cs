@@ -34,11 +34,6 @@ namespace SystemOfCurricula.Models
 
         public int Semestr { get; set; }
 
-        public  double TotalCredit
-        {
-            get { return CourseCredit + CourseWorkCredit; }
-        }
-
         public virtual Teacher Teacher { get; set; }
 
         public virtual Teacher Teacher1 { get; set; }

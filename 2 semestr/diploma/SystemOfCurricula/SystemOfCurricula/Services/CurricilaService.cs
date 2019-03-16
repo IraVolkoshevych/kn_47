@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc.Html;
 using SystemOfCurricula.Models;
 using SystemOfCurricula.Models.DTOs;
 
@@ -143,6 +144,23 @@ namespace SystemOfCurricula.Services
             }
         }
 
+        public static List<CourseDTO> LoadCoursesForMakingDependencies(int semestr, int specialityId)
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var courses = (from subject in dbContext.Subject
+                    join course in dbContext.Course on subject.SubjectID equals course.SubjectID
+                    where course.Semestr <= semestr && course.SpecialityID == specialityId
+                    select new CourseDTO()
+                    {
+                        CourseId = course.CourseID,
+                        CourseName = subject.SubjectName
+                    }).OrderBy(c => c.CourseName).ToList();
+
+                return courses;
+            }
+        }
+
         public static List<SubjectDTO> LoadSubjects(int specialityId)
         {
             using (var dbContext = new SystemOfCurriculaContext())
@@ -160,9 +178,34 @@ namespace SystemOfCurricula.Services
                 {
                     SubjectId = s.SubjectID,
                     SubjectName = s.SubjectName
-                }).ToList();
+                }).OrderBy(s => s.SubjectName).ToList();
 
                 return subjects;
+            }
+        }
+
+        public static List<string> LoadDepartments()
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var departments = dbContext.Teacher.Select(t => t.Department).Where(t => t != "").Distinct().ToList();
+
+                return departments;
+            }
+        }
+
+        public static List<TeacherDTO> LoadTeachers(string department)
+        {
+            using (var dbContext = new SystemOfCurriculaContext())
+            {
+                var teachers = dbContext.Teacher.Where(t => t.Department == department).
+                    Select(t => new TeacherDTO()
+                    {
+                        TeacherId = t.TeacherID,
+                        TeacherName = t.TeacherLastName + " " + t.TeacherFirstName
+                    }).OrderBy(t => t.TeacherName).ToList();
+
+                return teachers;
             }
         }
 
@@ -181,19 +224,41 @@ namespace SystemOfCurricula.Services
             }
         }
 
-        public static string SaveCourse(Course courseInfo)
+        public static string SaveCourse(CourseInfoDTO courseInfo)
         {
             using (var dbContext = new SystemOfCurriculaContext())
             {
                 var creditSum = dbContext.Course.Where(course => 
-                        course.Semestr == courseInfo.Semestr && course.SpecialityID == courseInfo.SpecialityID)
-                        .Select(c => c.TotalCredit).Sum();
+                        course.Semestr == courseInfo.Semestr && course.SpecialityID == courseInfo.SpecialityID).ToList()
+                    .Select(c => c.CourseCredit + c.CourseWorkCredit).Sum();
 
-                var probablyCreditSum = creditSum + courseInfo.TotalCredit;
+                var probablyCreditSum = creditSum + courseInfo.CourseWorkCredit + courseInfo.CourseCredit;
 
-                if (probablyCreditSum < 30)
+                if (probablyCreditSum <= 30)
                 {
-                    dbContext.Course.Add(courseInfo);
+                    var course  = new Course()
+                    {
+                        SubjectID = courseInfo.CourseID,
+                        SpecialityID = courseInfo.SpecialityID,
+                        Lecturer = courseInfo.LecturerID,
+                        Assistant = courseInfo.AssistantID,
+                        Semestr = courseInfo.Semestr,
+                        CourseCredit = courseInfo.CourseCredit,
+                        CourseWorkCredit = courseInfo.CourseWorkCredit,
+                        IsOnlyPractice = courseInfo.IsOnlyPractice
+                    };
+
+                    dbContext.Course.Add(course);
+
+                    foreach (var startCourse in courseInfo.StartCourses)
+                    {
+                        dbContext.CourseDependency.Add(new CourseDependency()
+                        {
+                            StartCourseID = startCourse,
+                            DependentCourseID = course.CourseID
+                        });
+                    }
+
                     dbContext.SaveChanges();
                     return "";
                 }
@@ -218,6 +283,18 @@ namespace SystemOfCurricula.Services
     {
         public int SubjectId { get; set; }
         public string SubjectName { get; set; }
+    }
+
+    public class CourseDTO
+    {
+        public int CourseId { get; set; }
+        public string CourseName { get; set; }
+    }
+
+    public class TeacherDTO
+    {
+        public int TeacherId { get; set; }
+        public string TeacherName { get; set; }
     }
 
     #endregion

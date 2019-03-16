@@ -5,6 +5,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
@@ -24,7 +26,9 @@ class CourseMap extends React.Component {
             isOpenInfoModal: false,
             selectedCourseInfo : null,
             courseDependencies : null,
-            isOpenCreatingModal: false
+            isOpenCreatingModal: false,
+            errorModalMessage : ""
+            
         }
 
         this.loadData();
@@ -36,6 +40,7 @@ class CourseMap extends React.Component {
         this.loadModalData = this.loadModalData.bind(this);
         this.chooseColorForCourse = this.chooseColorForCourse.bind(this);
         this.handleOpenCreatingModal = this.handleOpenCreatingModal.bind(this);
+        this.closeError = this.closeError.bind(this);
     }
 
     loadCourseInfo(courseId){
@@ -83,10 +88,26 @@ class CourseMap extends React.Component {
             });
     }
 
-    setModalVisibility(isOpen, modalName){
+    setModalVisibility(isOpen, modalName, error){
         this.setState({
             [modalName] : isOpen
         });
+        if(typeof(error) === "string"){
+            if(error === ""){
+                this.loadData();
+            }
+            else{
+                this.setState({
+                    errorModalMessage : error
+                })
+            }
+        }
+    }
+
+    closeError(){
+        this.setState({
+            errorModalMessage : ""
+        })
     }
 
     preparedDataForTable(){
@@ -409,6 +430,15 @@ class CourseMap extends React.Component {
                             courseDependencies={this.state.courseDependencies} updateModalContent={this.loadModalData}/>
             <CreateCourse isOpen={this.state.isOpenCreatingModal} setModalVisibility={this.setModalVisibility} 
                           specialityId={this.props.match.params.specialityId}/>
+            <Dialog
+                onClose={this.closeError}
+                aria-labelledby="alert-dialog-title" 
+                open={this.state.errorModalMessage !== ""}
+                maxWidth="false">
+                <DialogTitle>
+                    {this.state.errorModalMessage}
+                </DialogTitle>
+            </Dialog>
           </div>
           </span>)
     }

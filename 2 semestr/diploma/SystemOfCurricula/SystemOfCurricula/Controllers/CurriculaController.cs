@@ -70,6 +70,14 @@ namespace SystemOfCurricula.Controllers
             return Ok(courseInfoAndDependencies);
         }
 
+        [Route("api/GetCoursesForDependencies/{semestr}/{specialityId}")]
+        [HttpGet]
+        public IHttpActionResult LoadCoursesForDependencies(int semestr, int specialityId)
+        {
+            var courses = CurricilaService.LoadCoursesForMakingDependencies(semestr, specialityId);
+            return Ok(courses);
+        }
+
         [Route("api/GetSpecialities")]
         [HttpGet]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -90,6 +98,26 @@ namespace SystemOfCurricula.Controllers
             return Ok(subjects);
         }
 
+        [Route("api/GetDepartments")]
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public IHttpActionResult LoadDepartments()
+        {
+            var departments = CurricilaService.LoadDepartments();
+
+            return Ok(departments);
+        }
+
+        [Route("api/GetTeachers/{department}")]
+        [HttpGet]
+        [EnableCors(origins: "*", headers: "*", methods: "*")]
+        public IHttpActionResult LoadTeachers(string department)
+        {
+            var departments = CurricilaService.LoadTeachers(department);
+
+            return Ok(departments);
+        }
+
         #endregion
 
         #region Creating
@@ -106,10 +134,9 @@ namespace SystemOfCurricula.Controllers
         [Route("api/SaveCourse")]
         [HttpPost]
         [EnableCors(origins: "*", headers: "*", methods: "*")]
-        public IHttpActionResult SaveCourse(Course model)
+        public IHttpActionResult SaveCourse(CourseInfoDTO model)
         {
-            CurricilaService.SaveCourse(model);
-            return Ok();
+            return Ok(CurricilaService.SaveCourse(model));
         }
 
         #endregion
