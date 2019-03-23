@@ -234,7 +234,7 @@ class CourseMap extends React.Component {
             padding: '6px 18px 6px 14px'
         }
 
-        console.log(this.state)
+        let isAdmin = this.props.match.params.isAdmin === "true";
         let info = this.state.selectedCourseInfo;
         let color = "primary"; 
         let backgroundColor = "red";  
@@ -273,11 +273,15 @@ class CourseMap extends React.Component {
                   <TableCell>VI семестр</TableCell>
                   <TableCell>VII семестр</TableCell>
                   <TableCell>VIII семестр</TableCell>
-                  <TableCell>
-                    <Fab className="ml-3" size="small" color="primary" aria-label="Add" >
-                        <AddIcon onClick={this.handleOpenCreatingModal}/>
-                    </Fab>
-                  </TableCell>
+                    <TableCell>
+                    {
+                        isAdmin ?
+                        <Fab className="ml-3" size="small" color="primary" aria-label="Add" >
+                            <AddIcon onClick={this.handleOpenCreatingModal}/>
+                        </Fab>
+                        : ""
+                  }
+                    </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>

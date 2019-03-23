@@ -57,7 +57,7 @@ class SpecialitiesPage extends React.Component {
     }
 
     addUrl(event) {
-        window.location.href = window.location.origin + "/courseMap/" + event.currentTarget.value;
+        window.location.href = window.location.origin + "/courseMap/" + event.currentTarget.value + "/" + this.props.match.params.isAdmin;
     };
 
     handleChange = propsName => event => {
@@ -88,8 +88,8 @@ class SpecialitiesPage extends React.Component {
     }
 
     render(){
-        debugger;
-        let color = "primary";              
+        let color = "primary";   
+        let isAdmin = this.props.match.params.isAdmin === "true";           
         return(
             <div>
             <span className="mb-2 mt-2 d-flex justify-content-center">
@@ -104,10 +104,14 @@ class SpecialitiesPage extends React.Component {
                         </Button>
                      )
                  })
-             } 
-             <Fab className="ml-3" size="small" color="primary" aria-label="Add" >
-                 <AddIcon onClick={this.handleOpen}/>
-             </Fab>
+             }
+             {
+                 isAdmin ?
+                 <Fab className="ml-3" size="small" color="primary" aria-label="Add" >
+                     <AddIcon onClick={this.handleOpen}/>
+                 </Fab>
+                 : ""
+             }
              </span>  
              <Dialog
                 onClose={this.handleClose}

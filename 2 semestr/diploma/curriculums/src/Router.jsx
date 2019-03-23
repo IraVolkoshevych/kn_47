@@ -8,8 +8,8 @@ class CirriculaRouter extends React.Component {
       return (
         <div>
             <Switch>
-                <Route exact path="/" component={SpecialitiesPage} />
-                <Route path="/courseMap/:specialityId" component={CourseMap} />
+                <Route exact path="/:isAdmin" component={SpecialitiesPage} />
+                <Route path="/courseMap/:specialityId/:isAdmin" component={CourseMap} />
             </Switch>
         </div>
       );
