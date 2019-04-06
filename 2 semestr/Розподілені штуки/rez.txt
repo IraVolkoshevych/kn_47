@@ -1,0 +1,1 @@
+calculated result = 3.75285829

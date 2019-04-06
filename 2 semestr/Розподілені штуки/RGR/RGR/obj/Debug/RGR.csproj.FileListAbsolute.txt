@@ -1,0 +1,7 @@
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\Розподілені штуки\RGR\RGR\obj\Debug\RGR.csprojResolveAssemblyReference.cache
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\Розподілені штуки\RGR\RGR\obj\Debug\RGR.csproj.CoreCompileInputs.cache
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\Розподілені штуки\RGR\RGR\bin\Debug\RGR.exe.config
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\Розподілені штуки\RGR\RGR\bin\Debug\RGR.exe
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\Розподілені штуки\RGR\RGR\bin\Debug\RGR.pdb
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\Розподілені штуки\RGR\RGR\obj\Debug\RGR.exe
+C:\Users\Ivanov\Documents\НУЛП\KN_47\2 semestr\Розподілені штуки\RGR\RGR\obj\Debug\RGR.pdb
